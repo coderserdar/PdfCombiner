@@ -117,6 +117,7 @@
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

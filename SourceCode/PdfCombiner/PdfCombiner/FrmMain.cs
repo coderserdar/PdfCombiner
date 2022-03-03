@@ -190,6 +190,13 @@ namespace PdfCombiner
             }
         }
 
+        /// <summary>
+        /// This function is used to delete files in listbox which are chosen
+        /// If you press the Delete button in your keyboard
+        /// The selected files will be deleted from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbFiles_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == Keys.Delete.GetHashCode())
@@ -215,5 +222,15 @@ namespace PdfCombiner
             }
         }
 
+        /// <summary>
+        /// This function is used to terminate application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Exit();
+        }
     }
 }
