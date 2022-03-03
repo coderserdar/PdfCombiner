@@ -23,8 +23,8 @@ namespace PdfCombiner
         /// This function is used to set some kind of parameters which can be used
         /// In PDF combination
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             //var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
@@ -35,8 +35,8 @@ namespace PdfCombiner
         /// <summary>
         /// This function is used to terminate application
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -49,8 +49,8 @@ namespace PdfCombiner
         /// The listbox in the form will be filled with the name of the files 
         /// Which you choose to combine
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             using (var dialogAddFile = new OpenFileDialog())
@@ -90,8 +90,8 @@ namespace PdfCombiner
         /// <summary>
         /// This function is used to clear the file list in listbox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void btnClearList_Click(object sender, EventArgs e)
         {
             var fileCount = lbFiles.Items.Count;
@@ -104,8 +104,8 @@ namespace PdfCombiner
         /// Folder Dialog recursively
         /// When you use it the added files will be seen in listbox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void btnAddFolder_Click(object sender, EventArgs e)
         {
             using (var dialogAddFolder = new FolderBrowserDialog())
@@ -133,8 +133,8 @@ namespace PdfCombiner
         ///// This function is used to set font for
         ///// Combining PDF files With iTextSharp NuGet Package
         ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
+        ///// <param name="sender">The sender info (For example Main Form)</param>
+        ///// <param name="e">Event Arguments</param>
         //private void btnSetFont_Click(object sender, EventArgs e)
         //{
         //    using (var dialogSetFont = new FontDialog())
@@ -156,8 +156,8 @@ namespace PdfCombiner
         /// If you press the Delete button in your keyboard
         /// The selected files will be deleted from the list
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void lbFiles_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == Keys.Delete.GetHashCode())
@@ -189,8 +189,8 @@ namespace PdfCombiner
         /// And you can see the progress in progress bar
         /// It uses PdfSharp Nuget Package
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void btnCombinePdfSharp_Click(object sender, EventArgs e)
         {
             try
@@ -260,8 +260,8 @@ namespace PdfCombiner
         /// And you can see the progress in progress bar
         /// It uses iTextSharp Nuget Package
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void btnCombineITextSharp_Click(object sender, EventArgs e)
         {
             try
