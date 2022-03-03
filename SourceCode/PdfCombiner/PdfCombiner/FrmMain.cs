@@ -147,26 +147,36 @@ namespace PdfCombiner
                             outputFile.Options.CompressContentStreams = true;
                             outputFile.Options.EnableCcittCompressionForBilevelImages = true;
                             outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
+                            var fileCount = lbFiles.Items.Count;
+                            var combinedFiles = 0;
 
                             for (int i = 0; i < lbFiles.Items.Count; i++)
                             {
-                                var inputDocument = PdfReader.Open(lbFiles.Items[i].ToString(), PdfDocumentOpenMode.Import);
-                                var count = inputDocument.PageCount;
-                                for (int idx = 0; idx < count; idx++)
+                                try
                                 {
-                                    var page = inputDocument.Pages[idx];
-                                    outputFile.AddPage(page);
+                                    var inputDocument = PdfReader.Open(lbFiles.Items[i].ToString(), PdfDocumentOpenMode.Import);
+                                    var count = inputDocument.PageCount;
+                                    for (int idx = 0; idx < count; idx++)
+                                    {
+                                        var page = inputDocument.Pages[idx];
+                                        outputFile.AddPage(page);
+                                    }
+                                    inputDocument.Close();
+                                    combinedFiles++;
                                 }
-                                inputDocument.Close();
+                                catch (Exception)
+                                {
+                                    fileCount--;
+                                }
 
-                                pbFiles.Value = ((i + 1) * 100 / lbFiles.Items.Count);
+                                pbFiles.Value = (combinedFiles * 100 / fileCount);
                                 if (pbFiles.Value > pbFiles.Maximum)
                                     pbFiles.Value = pbFiles.Maximum;
                             }
                             outputFile.Save(outputFileName);
                             outputFile.Close();
 
-                            MessageBox.Show(lbFiles.Items.Count + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             pbFiles.Value = pbFiles.Minimum;
                         }
