@@ -116,7 +116,7 @@
             this.Controls.Add(this.btnCombine);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Page";
+            this.Text = "PDF Combiner";
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

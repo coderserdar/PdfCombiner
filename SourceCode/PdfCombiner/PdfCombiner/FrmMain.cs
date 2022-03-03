@@ -19,6 +19,12 @@ namespace PdfCombiner
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This function is used to set some kind of parameters which can be used
+        /// In PDF combination
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             //var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
@@ -51,6 +57,11 @@ namespace PdfCombiner
             }
         }
 
+        /// <summary>
+        /// This function is used to set options of file dialog like
+        /// Filter, start path etc.
+        /// </summary>
+        /// <param name="dialogAddFile">File Dialog</param>
         private static void InitializeFileDialog(OpenFileDialog dialogAddFile)
         {
             dialogAddFile.Multiselect = true;
@@ -60,11 +71,23 @@ namespace PdfCombiner
             dialogAddFile.DefaultExt = "pdf";
         }
 
+        /// <summary>
+        /// This function is used to clear the file list in listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearList_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
         }
 
+        /// <summary>
+        /// This function is used to add PDF files in a folder which you choose in
+        /// Folder Dialog recursively
+        /// When you use it the added files will be seen in listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddFolder_Click(object sender, EventArgs e)
         {
             using (var dialogAddFolder = new FolderBrowserDialog())
@@ -97,6 +120,13 @@ namespace PdfCombiner
         //    }
         //}
 
+        /// <summary>
+        /// This function is used to take list of PDF files in listbox,
+        /// Combine them with a single file in location which you choose in folder dialog
+        /// And you can see the progress in progress bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCombine_Click(object sender, EventArgs e)
         {
             try
@@ -146,6 +176,7 @@ namespace PdfCombiner
             catch (Exception ex)
             {
                 MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                pbFiles.Value = pbFiles.Minimum;
             }
         }
 
