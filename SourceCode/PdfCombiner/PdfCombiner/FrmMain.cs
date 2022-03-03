@@ -1,4 +1,4 @@
-﻿using PdfSharp.Drawing;
+﻿using iTextSharp.text;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
@@ -11,7 +11,7 @@ namespace PdfCombiner
 {
     public partial class FrmMain : Form
     {
-        public XFont AppFont { get; set; }
+        public iTextSharp.text.Font AppFont { get; set; }
         public const string AppTitle = "PDF Combiner";
 
         public FrmMain()
@@ -33,6 +33,17 @@ namespace PdfCombiner
         }
 
         /// <summary>
+        /// This function is used to terminate application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Exit();
+        }
+
+        /// <summary>
         /// It is used to add single or multiple PDF files to combine
         /// When you choose file or files
         /// The listbox in the form will be filled with the name of the files 
@@ -46,13 +57,18 @@ namespace PdfCombiner
             {
                 InitializeFileDialog(dialogAddFile);
                 var result = dialogAddFile.ShowDialog();
+                var addedFileCount = 0;
                 if (result == DialogResult.OK && dialogAddFile.FileNames != null)
                 {
                     foreach (var file in dialogAddFile.FileNames)
                     {
                         if (!lbFiles.Items.Contains(file))
+                        {
                             lbFiles.Items.Add(file);
+                            addedFileCount++;
+                        }
                     }
+                    MessageBox.Show(addedFileCount + " file/s successfully added to the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -78,7 +94,9 @@ namespace PdfCombiner
         /// <param name="e"></param>
         private void btnClearList_Click(object sender, EventArgs e)
         {
+            var fileCount = lbFiles.Items.Count;
             lbFiles.Items.Clear();
+            MessageBox.Show(fileCount + " file/s successfully deleted from the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -96,15 +114,27 @@ namespace PdfCombiner
                 if (result == DialogResult.OK && !string.IsNullOrEmpty(dialogAddFolder.SelectedPath))
                 {
                     var fileNames = Directory.GetFiles(dialogAddFolder.SelectedPath, "*.pdf", SearchOption.AllDirectories);
+                    var addedFileCount = 0;
                     foreach (var file in fileNames)
                     {
                         if (!lbFiles.Items.Contains(file))
+                        {
                             lbFiles.Items.Add(file);
+                            addedFileCount++;
+                        }
                     }
+                    MessageBox.Show(addedFileCount + " file/s successfully added to the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
+        #region Comment Block
+        ///// <summary>
+        ///// This function is used to set font for
+        ///// Combining PDF files With iTextSharp NuGet Package
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
         //private void btnSetFont_Click(object sender, EventArgs e)
         //{
         //    using (var dialogSetFont = new FontDialog())
@@ -113,21 +143,55 @@ namespace PdfCombiner
         //        if (result == DialogResult.OK && dialogSetFont.Font != null)
         //        {
         //            var fontDialog = dialogSetFont.Font;
-        //            var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-        //            AppFont = new XFont(fontDialog.FontFamily.Name, fontDialog.Size, (XFontStyle)fontDialog.Style, options);
-        //            lblDetails.Text = "Font Type: " + AppFont.FontFamily.Name + ", Font Size: " + AppFont.Size + ", Font Style: " + AppFont.Style;
+        //            AppFont = FontFactory.GetFont(fontDialog.FontFamily.Name, fontDialog.Size, BaseColor.BLACK);
+        //            AppFont.SetStyle(fontDialog.Style.ToString());
+        //            lblDetails.Text = "Font Type: " + AppFont.Family.ToString() + ", Font Size: " + AppFont.Size + ", Font Style: " + AppFont.Style;
         //        }
         //    }
         //}
+        #endregion
+
+        /// <summary>
+        /// This function is used to delete files in listbox which are chosen
+        /// If you press the Delete button in your keyboard
+        /// The selected files will be deleted from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lbFiles_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Keys.Delete.GetHashCode())
+            {
+                var allItems = new List<string>();
+                var removedItems = new List<string>();
+                var fileCount = lbFiles.SelectedItems.Count;
+                for (int i = 0; i < lbFiles.SelectedItems.Count; i++)
+                {
+                    removedItems.Add(lbFiles.SelectedItems[i].ToString());
+                }
+                foreach (var item in lbFiles.Items)
+                {
+                    if (!removedItems.Any(j => j == item.ToString()))
+                        allItems.Add(item.ToString());
+                }
+                lbFiles.Items.Clear();
+                foreach (var item in allItems)
+                {
+                    lbFiles.Items.Add(item);
+                }
+                MessageBox.Show(fileCount + " file/s are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
         /// <summary>
         /// This function is used to take list of PDF files in listbox,
         /// Combine them with a single file in location which you choose in folder dialog
         /// And you can see the progress in progress bar
+        /// It uses PdfSharp Nuget Package
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCombine_Click(object sender, EventArgs e)
+        private void btnCombinePdfSharp_Click(object sender, EventArgs e)
         {
             try
             {
@@ -191,46 +255,81 @@ namespace PdfCombiner
         }
 
         /// <summary>
-        /// This function is used to delete files in listbox which are chosen
-        /// If you press the Delete button in your keyboard
-        /// The selected files will be deleted from the list
+        /// This function is used to take list of PDF files in listbox,
+        /// Combine them with a single file in location which you choose in folder dialog
+        /// And you can see the progress in progress bar
+        /// It uses iTextSharp Nuget Package
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lbFiles_KeyDown(object sender, KeyEventArgs e)
+        private void btnCombineITextSharp_Click(object sender, EventArgs e)
         {
-            if (e.KeyValue == Keys.Delete.GetHashCode())
+            try
             {
-                var allItems = new List<string>();
-                var removedItems = new List<string>();
-                var fileCount = lbFiles.SelectedItems.Count;
-                for (int i = 0; i < lbFiles.SelectedItems.Count; i++)
+                if (lbFiles.Items.Count < 2)
                 {
-                    removedItems.Add(lbFiles.SelectedItems[i].ToString());
+                    MessageBox.Show("There must be at least 2 PDF files to combine", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                foreach (var item in lbFiles.Items)
+                else
                 {
-                    if (!removedItems.Any(j => j == item.ToString()))
-                        allItems.Add(item.ToString());
-                }
-                lbFiles.Items.Clear();
-                foreach (var item in allItems)
-                {
-                    lbFiles.Items.Add(item);
-                }
-                MessageBox.Show(fileCount + " files are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+                    using (var dialogExport = new FolderBrowserDialog())
+                    {
+                        var result = dialogExport.ShowDialog();
+                        if (result == DialogResult.OK && !string.IsNullOrEmpty(dialogExport.SelectedPath))
+                        {
+                            var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid().ToString() + ".pdf";
+                            var fileCount = lbFiles.Items.Count;
+                            var combinedFiles = 0;
 
-        /// <summary>
-        /// This function is used to terminate application
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Application.Exit();
+                            var outputFile = new Document();
+                            using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
+                            {
+                                var pdfWriter = new iTextSharp.text.pdf.PdfCopy(outputFile, outputFileStream);
+                                if (pdfWriter == null)
+                                {
+                                    return;
+                                }
+                                pdfWriter.SetFullCompression();
+                                outputFile.Open();
+                                for (int i = 0; i < lbFiles.Items.Count; i++)
+                                {
+                                    try
+                                    {
+                                        var pdfReader = new iTextSharp.text.pdf.PdfReader(lbFiles.Items[i].ToString());
+                                        pdfReader.ConsolidateNamedDestinations();
+                                        for (int j = 1; j <= pdfReader.NumberOfPages; j++)
+                                        {
+                                            var page = pdfWriter.GetImportedPage(pdfReader, j);
+                                            pdfWriter.AddPage(page);
+                                        }
+                                        pdfReader.Close();
+                                        combinedFiles++;
+                                    }
+                                    catch (Exception)
+                                    {
+                                        fileCount--;
+                                    }
+
+                                    pbFiles.Value = (combinedFiles * 100 / fileCount);
+                                    if (pbFiles.Value > pbFiles.Maximum)
+                                        pbFiles.Value = pbFiles.Maximum;
+                                }
+                                pdfWriter.Close();
+                                outputFile.Close();
+                            }
+
+                            MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            pbFiles.Value = pbFiles.Minimum;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                pbFiles.Value = pbFiles.Minimum;
+            }
         }
     }
 }

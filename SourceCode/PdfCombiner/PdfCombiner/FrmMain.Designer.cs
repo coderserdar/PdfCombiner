@@ -28,30 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCombine = new System.Windows.Forms.Button();
+            this.btnCombinePdfSharp = new System.Windows.Forms.Button();
             this.btnAddFolder = new System.Windows.Forms.Button();
             this.btnAddFile = new System.Windows.Forms.Button();
             this.btnClearList = new System.Windows.Forms.Button();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.lblDetails = new System.Windows.Forms.Label();
             this.pbFiles = new System.Windows.Forms.ProgressBar();
+            this.btnCombineITextSharp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnCombine
+            // btnCombinePdfSharp
             // 
-            this.btnCombine.Location = new System.Drawing.Point(544, 12);
-            this.btnCombine.Name = "btnCombine";
-            this.btnCombine.Size = new System.Drawing.Size(112, 23);
-            this.btnCombine.TabIndex = 0;
-            this.btnCombine.Text = "Combine Files";
-            this.btnCombine.UseVisualStyleBackColor = true;
-            this.btnCombine.Click += new System.EventHandler(this.btnCombine_Click);
+            this.btnCombinePdfSharp.Location = new System.Drawing.Point(487, 12);
+            this.btnCombinePdfSharp.Name = "btnCombinePdfSharp";
+            this.btnCombinePdfSharp.Size = new System.Drawing.Size(169, 23);
+            this.btnCombinePdfSharp.TabIndex = 0;
+            this.btnCombinePdfSharp.Text = "Combine Files (PdfSharp)";
+            this.btnCombinePdfSharp.UseVisualStyleBackColor = true;
+            this.btnCombinePdfSharp.Click += new System.EventHandler(this.btnCombinePdfSharp_Click);
             // 
             // btnAddFolder
             // 
-            this.btnAddFolder.Location = new System.Drawing.Point(93, 12);
+            this.btnAddFolder.Location = new System.Drawing.Point(12, 38);
             this.btnAddFolder.Name = "btnAddFolder";
-            this.btnAddFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnAddFolder.Size = new System.Drawing.Size(78, 23);
             this.btnAddFolder.TabIndex = 2;
             this.btnAddFolder.Text = "Add Folder";
             this.btnAddFolder.UseVisualStyleBackColor = true;
@@ -61,7 +62,7 @@
             // 
             this.btnAddFile.Location = new System.Drawing.Point(12, 12);
             this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(75, 23);
+            this.btnAddFile.Size = new System.Drawing.Size(78, 23);
             this.btnAddFile.TabIndex = 3;
             this.btnAddFile.Text = "Add Files";
             this.btnAddFile.UseVisualStyleBackColor = true;
@@ -80,17 +81,17 @@
             // lbFiles
             // 
             this.lbFiles.FormattingEnabled = true;
-            this.lbFiles.Location = new System.Drawing.Point(12, 67);
+            this.lbFiles.Location = new System.Drawing.Point(12, 88);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFiles.Size = new System.Drawing.Size(644, 147);
+            this.lbFiles.Size = new System.Drawing.Size(644, 186);
             this.lbFiles.TabIndex = 5;
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             // 
             // lblDetails
             // 
             this.lblDetails.AutoSize = true;
-            this.lblDetails.Location = new System.Drawing.Point(12, 45);
+            this.lblDetails.Location = new System.Drawing.Point(12, 65);
             this.lblDetails.Name = "lblDetails";
             this.lblDetails.Size = new System.Drawing.Size(0, 13);
             this.lblDetails.TabIndex = 6;
@@ -99,21 +100,32 @@
             // 
             this.pbFiles.Location = new System.Drawing.Point(270, 12);
             this.pbFiles.Name = "pbFiles";
-            this.pbFiles.Size = new System.Drawing.Size(268, 23);
+            this.pbFiles.Size = new System.Drawing.Size(211, 46);
             this.pbFiles.TabIndex = 7;
+            // 
+            // btnCombineITextSharp
+            // 
+            this.btnCombineITextSharp.Location = new System.Drawing.Point(487, 38);
+            this.btnCombineITextSharp.Name = "btnCombineITextSharp";
+            this.btnCombineITextSharp.Size = new System.Drawing.Size(169, 23);
+            this.btnCombineITextSharp.TabIndex = 9;
+            this.btnCombineITextSharp.Text = "Combine Files (iTextSharp)";
+            this.btnCombineITextSharp.UseVisualStyleBackColor = true;
+            this.btnCombineITextSharp.Click += new System.EventHandler(this.btnCombineITextSharp_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 227);
+            this.ClientSize = new System.Drawing.Size(668, 275);
+            this.Controls.Add(this.btnCombineITextSharp);
             this.Controls.Add(this.pbFiles);
             this.Controls.Add(this.lblDetails);
             this.Controls.Add(this.lbFiles);
             this.Controls.Add(this.btnClearList);
             this.Controls.Add(this.btnAddFile);
             this.Controls.Add(this.btnAddFolder);
-            this.Controls.Add(this.btnCombine);
+            this.Controls.Add(this.btnCombinePdfSharp);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
@@ -126,13 +138,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCombine;
+        private System.Windows.Forms.Button btnCombinePdfSharp;
         private System.Windows.Forms.Button btnAddFolder;
         private System.Windows.Forms.Button btnAddFile;
         private System.Windows.Forms.Button btnClearList;
         private System.Windows.Forms.ListBox lbFiles;
         private System.Windows.Forms.Label lblDetails;
         private System.Windows.Forms.ProgressBar pbFiles;
+        private System.Windows.Forms.Button btnCombineITextSharp;
     }
 }
 
