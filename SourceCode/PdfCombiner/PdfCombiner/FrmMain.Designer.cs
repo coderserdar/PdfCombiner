@@ -52,7 +52,7 @@
             // 
             this.btnAddFolder.Location = new System.Drawing.Point(12, 38);
             this.btnAddFolder.Name = "btnAddFolder";
-            this.btnAddFolder.Size = new System.Drawing.Size(78, 23);
+            this.btnAddFolder.Size = new System.Drawing.Size(156, 23);
             this.btnAddFolder.TabIndex = 2;
             this.btnAddFolder.Text = "Add Folder";
             this.btnAddFolder.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@
             // 
             this.btnAddFile.Location = new System.Drawing.Point(12, 12);
             this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(78, 23);
+            this.btnAddFile.Size = new System.Drawing.Size(156, 23);
             this.btnAddFile.TabIndex = 3;
             this.btnAddFile.Text = "Add Files";
             this.btnAddFile.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             // 
             this.btnClearList.Location = new System.Drawing.Point(174, 12);
             this.btnClearList.Name = "btnClearList";
-            this.btnClearList.Size = new System.Drawing.Size(90, 23);
+            this.btnClearList.Size = new System.Drawing.Size(90, 49);
             this.btnClearList.TabIndex = 4;
             this.btnClearList.Text = "Clear File List";
             this.btnClearList.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // 
             this.pbFiles.Location = new System.Drawing.Point(270, 12);
             this.pbFiles.Name = "pbFiles";
-            this.pbFiles.Size = new System.Drawing.Size(211, 46);
+            this.pbFiles.Size = new System.Drawing.Size(211, 49);
             this.pbFiles.TabIndex = 7;
             // 
             // btnCombineITextSharp
@@ -130,7 +130,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
-            this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

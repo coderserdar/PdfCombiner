@@ -11,25 +11,11 @@ namespace PdfCombiner
 {
     public partial class FrmMain : Form
     {
-        public iTextSharp.text.Font AppFont { get; set; }
         public const string AppTitle = "PDF Combiner";
 
         public FrmMain()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// This function is used to set some kind of parameters which can be used
-        /// In PDF combination
-        /// </summary>
-        /// <param name="sender">The sender info (For example Main Form)</param>
-        /// <param name="e">Event Arguments</param>
-        private void FrmMain_Shown(object sender, EventArgs e)
-        {
-            //var options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
-            //AppFont = new XFont("Times New Roman", 12, XFontStyle.Regular, options);
-            //lblDetails.Text = "Font Type: " + AppFont.FontFamily.Name + ", Font Size: " + AppFont.Size + ", Font Style: " + AppFont.Style;
         }
 
         /// <summary>
@@ -127,29 +113,6 @@ namespace PdfCombiner
                 }
             }
         }
-
-        #region Comment Block
-        ///// <summary>
-        ///// This function is used to set font for
-        ///// Combining PDF files With iTextSharp NuGet Package
-        ///// </summary>
-        ///// <param name="sender">The sender info (For example Main Form)</param>
-        ///// <param name="e">Event Arguments</param>
-        //private void btnSetFont_Click(object sender, EventArgs e)
-        //{
-        //    using (var dialogSetFont = new FontDialog())
-        //    {
-        //        var result = dialogSetFont.ShowDialog();
-        //        if (result == DialogResult.OK && dialogSetFont.Font != null)
-        //        {
-        //            var fontDialog = dialogSetFont.Font;
-        //            AppFont = FontFactory.GetFont(fontDialog.FontFamily.Name, fontDialog.Size, BaseColor.BLACK);
-        //            AppFont.SetStyle(fontDialog.Style.ToString());
-        //            lblDetails.Text = "Font Type: " + AppFont.Family.ToString() + ", Font Size: " + AppFont.Size + ", Font Style: " + AppFont.Style;
-        //        }
-        //    }
-        //}
-        #endregion
 
         /// <summary>
         /// This function is used to delete files in listbox which are chosen
