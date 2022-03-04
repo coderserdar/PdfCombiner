@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 275);
+            this.ClientSize = new System.Drawing.Size(668, 287);
             this.Controls.Add(this.btnCombineITextSharp);
             this.Controls.Add(this.pbFiles);
             this.Controls.Add(this.lblDetails);
