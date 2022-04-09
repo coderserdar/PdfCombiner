@@ -30,6 +30,17 @@ namespace PdfCombiner
         }
 
         /// <summary>
+        /// This function is used to assign menu to listbox 
+        /// When form is shown
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
+            lbFiles.ContextMenuStrip = menuStrip;
+        }
+
+        /// <summary>
         /// It is used to add single or multiple PDF files to combine
         /// When you choose file or files
         /// The listbox in the form will be filled with the name of the files 
@@ -124,26 +135,7 @@ namespace PdfCombiner
         private void lbFiles_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == Keys.Delete.GetHashCode())
-            {
-                var allItems = new List<string>();
-                var removedItems = new List<string>();
-                var fileCount = lbFiles.SelectedItems.Count;
-                for (int i = 0; i < lbFiles.SelectedItems.Count; i++)
-                {
-                    removedItems.Add(lbFiles.SelectedItems[i].ToString());
-                }
-                foreach (var item in lbFiles.Items)
-                {
-                    if (!removedItems.Any(j => j == item.ToString()))
-                        allItems.Add(item.ToString());
-                }
-                lbFiles.Items.Clear();
-                foreach (var item in allItems)
-                {
-                    lbFiles.Items.Add(item);
-                }
-                MessageBox.Show(fileCount + " file/s are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                DeleteFilesFromListBox();
         }
 
         /// <summary>
@@ -293,6 +285,47 @@ namespace PdfCombiner
                 MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pbFiles.Value = pbFiles.Minimum;
             }
+        }
+
+        /// <summary>
+        /// This is used to delete selected items in listbox
+        /// When menu item Delete is clicked and opened dialog 
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemDelete_Click(object sender, EventArgs e)
+        {
+            var deleteDialog = new DialogResult();
+            deleteDialog = MessageBox.Show("You are about to delete " + lbFiles.SelectedItems.Count + " files in listbox. Are you sure?", AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (deleteDialog == DialogResult.Yes)
+                DeleteFilesFromListBox();
+        }
+
+        /// <summary>
+        /// This method is used to Delete selected files from ListBox
+        /// This is used different ways in this app
+        /// So we created this as a method
+        /// </summary>
+        private void DeleteFilesFromListBox()
+        {
+            var allItems = new List<string>();
+            var removedItems = new List<string>();
+            var fileCount = lbFiles.SelectedItems.Count;
+            for (int i = 0; i < lbFiles.SelectedItems.Count; i++)
+            {
+                removedItems.Add(lbFiles.SelectedItems[i].ToString());
+            }
+            foreach (var item in lbFiles.Items)
+            {
+                if (!removedItems.Any(j => j == item.ToString()))
+                    allItems.Add(item.ToString());
+            }
+            lbFiles.Items.Clear();
+            foreach (var item in allItems)
+            {
+                lbFiles.Items.Add(item);
+            }
+            MessageBox.Show(fileCount + " file/s are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

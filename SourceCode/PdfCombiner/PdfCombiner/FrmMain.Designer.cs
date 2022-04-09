@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCombinePdfSharp = new System.Windows.Forms.Button();
             this.btnAddFolder = new System.Windows.Forms.Button();
             this.btnAddFile = new System.Windows.Forms.Button();
@@ -36,6 +37,9 @@
             this.lblDetails = new System.Windows.Forms.Label();
             this.pbFiles = new System.Windows.Forms.ProgressBar();
             this.btnCombineITextSharp = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCombinePdfSharp
@@ -113,6 +117,21 @@
             this.btnCombineITextSharp.UseVisualStyleBackColor = true;
             this.btnCombineITextSharp.Click += new System.EventHandler(this.btnCombineITextSharp_Click);
             // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemDelete});
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // menuItemDelete
+            // 
+            this.menuItemDelete.Image = global::PdfCombiner.Properties.Resources.DeleteIcon1;
+            this.menuItemDelete.Name = "menuItemDelete";
+            this.menuItemDelete.Size = new System.Drawing.Size(180, 22);
+            this.menuItemDelete.Text = "Delete";
+            this.menuItemDelete.Click += new System.EventHandler(this.menuItemDelete_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +149,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
+            this.menuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,6 +166,8 @@
         private System.Windows.Forms.Label lblDetails;
         private System.Windows.Forms.ProgressBar pbFiles;
         private System.Windows.Forms.Button btnCombineITextSharp;
+        private System.Windows.Forms.ContextMenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
     }
 }
 
