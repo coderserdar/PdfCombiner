@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.btnCombinePdfSharp = new System.Windows.Forms.Button();
             this.btnAddFolder = new System.Windows.Forms.Button();
             this.btnAddFile = new System.Windows.Forms.Button();
@@ -39,6 +40,8 @@
             this.btnCombineITextSharp = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderAscending = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderDescending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,17 +123,35 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDelete});
+            this.menuItemDelete,
+            this.menuItemOrderAscending,
+            this.menuItemOrderDescending});
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(181, 48);
+            this.menuStrip.Size = new System.Drawing.Size(178, 70);
             // 
             // menuItemDelete
             // 
-            this.menuItemDelete.Image = global::PdfCombiner.Properties.Resources.DeleteIcon1;
+            this.menuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuItemDelete.Image")));
             this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(180, 22);
+            this.menuItemDelete.Size = new System.Drawing.Size(177, 22);
             this.menuItemDelete.Text = "Delete";
             this.menuItemDelete.Click += new System.EventHandler(this.menuItemDelete_Click);
+            // 
+            // menuItemOrderAscending
+            // 
+            this.menuItemOrderAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderAscending.Image")));
+            this.menuItemOrderAscending.Name = "menuItemOrderAscending";
+            this.menuItemOrderAscending.Size = new System.Drawing.Size(177, 22);
+            this.menuItemOrderAscending.Text = "Order (Ascending)";
+            this.menuItemOrderAscending.Click += new System.EventHandler(this.menuItemOrderAscending_Click);
+            // 
+            // menuItemOrderDescending
+            // 
+            this.menuItemOrderDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderDescending.Image")));
+            this.menuItemOrderDescending.Name = "menuItemOrderDescending";
+            this.menuItemOrderDescending.Size = new System.Drawing.Size(177, 22);
+            this.menuItemOrderDescending.Text = "Order (Descending)";
+            this.menuItemOrderDescending.Click += new System.EventHandler(this.menuItemOrderDescending_Click);
             // 
             // FrmMain
             // 
@@ -168,6 +189,8 @@
         private System.Windows.Forms.Button btnCombineITextSharp;
         private System.Windows.Forms.ContextMenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderAscending;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderDescending;
     }
 }
 

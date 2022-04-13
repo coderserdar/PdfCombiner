@@ -295,10 +295,46 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>
         private void menuItemDelete_Click(object sender, EventArgs e)
         {
-            var deleteDialog = new DialogResult();
-            deleteDialog = MessageBox.Show("You are about to delete " + lbFiles.SelectedItems.Count + " files in listbox. Are you sure?", AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (deleteDialog == DialogResult.Yes)
-                DeleteFilesFromListBox();
+            if (lbFiles.Items.Count > 0)
+            {
+                if (lbFiles.SelectedItems.Count > 0)
+                {
+                    var deleteDialog = new DialogResult();
+                    deleteDialog = MessageBox.Show("You are about to delete " + lbFiles.SelectedItems.Count + " files in listbox. Are you sure?", AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (deleteDialog == DialogResult.Yes)
+                        DeleteFilesFromListBox();
+                }
+                else
+                    MessageBox.Show("There is no selected files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to order elements in listbox ascending
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderAscending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItems(lbFiles, true);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to order elements in listbox ascending
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderDescending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItems(lbFiles, false);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -327,5 +363,24 @@ namespace PdfCombiner
             }
             MessageBox.Show(fileCount + " file/s are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        /// <summary>
+        /// This method is used to order items in listbox
+        /// And return them with the given order as parametre
+        /// </summary>
+        /// <param name="lb">ListBox info</param>
+        /// <param name="ascending">Order Type is Ascending Or Not</param>
+        private static ListBox SortItems(ListBox lb, bool ascending)
+        {
+            List<object> items;
+            items = lb.Items.OfType<object>().ToList();
+            lb.Items.Clear();
+            if (ascending)
+                lb.Items.AddRange(items.OrderBy(i => i).ToArray());
+            else
+                lb.Items.AddRange(items.OrderByDescending(i => i).ToArray());
+            return lb;
+        }
+
     }
 }
