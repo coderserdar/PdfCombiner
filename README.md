@@ -39,5 +39,6 @@ And you can look up screenshots like
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_05.png?raw=true"></td>
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_06.png?raw=true"></td>
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_07.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_08.png?raw=true"></td>
    </tr>
 </table>
