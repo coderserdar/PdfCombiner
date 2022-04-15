@@ -30,15 +30,15 @@ And you can look up screenshots like
 
 <table>
    <tr>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_01.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_02.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_03.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_04.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_01.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_02.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_03.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_04.png?raw=true"></td>
    </tr>
    <tr>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_05.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_06.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_07.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/App_Screens_08.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_05.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_06.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_07.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_08.png?raw=true"></td>
    </tr>
 </table>
