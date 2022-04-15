@@ -3,6 +3,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,6 +18,8 @@ namespace PdfCombiner
         {
             InitializeComponent();
         }
+
+        #region Form Init And Finalize Methods
 
         /// <summary>
         /// This function is used to terminate application
@@ -39,6 +42,10 @@ namespace PdfCombiner
         {
             lbFiles.ContextMenuStrip = menuStrip;
         }
+
+        #endregion
+
+        #region Add Item Methods
 
         /// <summary>
         /// It is used to add single or multiple PDF files to combine
@@ -85,18 +92,6 @@ namespace PdfCombiner
         }
 
         /// <summary>
-        /// This function is used to clear the file list in listbox
-        /// </summary>
-        /// <param name="sender">The sender info (For example Main Form)</param>
-        /// <param name="e">Event Arguments</param>
-        private void btnClearList_Click(object sender, EventArgs e)
-        {
-            var fileCount = lbFiles.Items.Count;
-            lbFiles.Items.Clear();
-            MessageBox.Show(fileCount + " file/s successfully deleted from the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        /// <summary>
         /// This function is used to add PDF files in a folder which you choose in
         /// Folder Dialog recursively
         /// When you use it the added files will be seen in listbox
@@ -125,18 +120,9 @@ namespace PdfCombiner
             }
         }
 
-        /// <summary>
-        /// This function is used to delete files in listbox which are chosen
-        /// If you press the Delete button in your keyboard
-        /// The selected files will be deleted from the list
-        /// </summary>
-        /// <param name="sender">The sender info (For example Main Form)</param>
-        /// <param name="e">Event Arguments</param>
-        private void lbFiles_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == Keys.Delete.GetHashCode())
-                DeleteFilesFromListBox();
-        }
+        #endregion
+
+        #region Combine PDF Methods
 
         /// <summary>
         /// This function is used to take list of PDF files in listbox,
@@ -287,6 +273,23 @@ namespace PdfCombiner
             }
         }
 
+        #endregion
+
+        #region Delete Item Methods
+
+        /// <summary>
+        /// This function is used to delete files in listbox which are chosen
+        /// If you press the Delete button in your keyboard
+        /// The selected files will be deleted from the list
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void lbFiles_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Keys.Delete.GetHashCode())
+                DeleteFilesFromListBox();
+        }
+
         /// <summary>
         /// This is used to delete selected items in listbox
         /// When menu item Delete is clicked and opened dialog 
@@ -307,32 +310,6 @@ namespace PdfCombiner
                 else
                     MessageBox.Show("There is no selected files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        /// <summary>
-        /// This method is used to order elements in listbox ascending
-        /// </summary>
-        /// <param name="sender">The sender info (For example Main Form)</param>
-        /// <param name="e">Event Arguments</param>
-        private void menuItemOrderAscending_Click(object sender, EventArgs e)
-        {
-            if (lbFiles.Items.Count > 0)
-                lbFiles = SortItems(lbFiles, true);
-            else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        /// <summary>
-        /// This method is used to order elements in listbox ascending
-        /// </summary>
-        /// <param name="sender">The sender info (For example Main Form)</param>
-        /// <param name="e">Event Arguments</param>
-        private void menuItemOrderDescending_Click(object sender, EventArgs e)
-        {
-            if (lbFiles.Items.Count > 0)
-                lbFiles = SortItems(lbFiles, false);
             else
                 MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -365,6 +342,48 @@ namespace PdfCombiner
         }
 
         /// <summary>
+        /// This function is used to clear the file list in listbox
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void btnClearList_Click(object sender, EventArgs e)
+        {
+            var fileCount = lbFiles.Items.Count;
+            lbFiles.Items.Clear();
+            MessageBox.Show(fileCount + " file/s successfully deleted from the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #endregion
+
+        #region Order Item Methods
+
+        /// <summary>
+        /// This method is used to order elements in listbox ascending
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderAscending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItems(lbFiles, true);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to order elements in listbox ascending
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderDescending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItems(lbFiles, false);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
         /// This method is used to order items in listbox
         /// And return them with the given order as parametre
         /// </summary>
@@ -382,5 +401,36 @@ namespace PdfCombiner
             return lb;
         }
 
+        #endregion
+
+        #region Drag Drop Item For Order Methods
+        private void lbFiles_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button.Equals(MouseButtons.Right))
+            {
+                menuStrip.Show();
+            }
+            else
+            {
+                if (this.lbFiles.SelectedItem == null) return;
+                this.lbFiles.DoDragDrop(this.lbFiles.SelectedItem, DragDropEffects.Move);
+            }
+        }
+
+        private void lbFiles_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void lbFiles_DragDrop(object sender, DragEventArgs e)
+        {
+            Point point = lbFiles.PointToClient(new Point(e.X, e.Y));
+            int index = this.lbFiles.IndexFromPoint(point);
+            if (index < 0) index = this.lbFiles.Items.Count - 1;
+            object data = e.Data.GetData(typeof(string));
+            this.lbFiles.Items.Remove(data);
+            this.lbFiles.Items.Insert(index, data);
+        }
+        #endregion
     }
 }
