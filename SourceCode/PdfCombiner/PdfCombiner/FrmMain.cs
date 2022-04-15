@@ -408,7 +408,7 @@ namespace PdfCombiner
         {
             if (e.Button.Equals(MouseButtons.Right))
             {
-                menuStrip.Show();
+                //menuStrip.Show();
             }
             else
             {

@@ -47,41 +47,53 @@
             // 
             // btnCombinePdfSharp
             // 
-            this.btnCombinePdfSharp.Location = new System.Drawing.Point(487, 12);
+            this.btnCombinePdfSharp.Image = ((System.Drawing.Image)(resources.GetObject("btnCombinePdfSharp.Image")));
+            this.btnCombinePdfSharp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCombinePdfSharp.Location = new System.Drawing.Point(487, 5);
             this.btnCombinePdfSharp.Name = "btnCombinePdfSharp";
-            this.btnCombinePdfSharp.Size = new System.Drawing.Size(169, 23);
+            this.btnCombinePdfSharp.Size = new System.Drawing.Size(169, 37);
             this.btnCombinePdfSharp.TabIndex = 0;
             this.btnCombinePdfSharp.Text = "Combine Files (PdfSharp)";
+            this.btnCombinePdfSharp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCombinePdfSharp.UseVisualStyleBackColor = true;
             this.btnCombinePdfSharp.Click += new System.EventHandler(this.btnCombinePdfSharp_Click);
             // 
             // btnAddFolder
             // 
-            this.btnAddFolder.Location = new System.Drawing.Point(12, 38);
+            this.btnAddFolder.Image = ((System.Drawing.Image)(resources.GetObject("btnAddFolder.Image")));
+            this.btnAddFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddFolder.Location = new System.Drawing.Point(12, 48);
             this.btnAddFolder.Name = "btnAddFolder";
-            this.btnAddFolder.Size = new System.Drawing.Size(156, 23);
+            this.btnAddFolder.Size = new System.Drawing.Size(107, 34);
             this.btnAddFolder.TabIndex = 2;
             this.btnAddFolder.Text = "Add Folder";
+            this.btnAddFolder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddFolder.UseVisualStyleBackColor = true;
             this.btnAddFolder.Click += new System.EventHandler(this.btnAddFolder_Click);
             // 
             // btnAddFile
             // 
-            this.btnAddFile.Location = new System.Drawing.Point(12, 12);
+            this.btnAddFile.Image = ((System.Drawing.Image)(resources.GetObject("btnAddFile.Image")));
+            this.btnAddFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddFile.Location = new System.Drawing.Point(12, 5);
             this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(156, 23);
+            this.btnAddFile.Size = new System.Drawing.Size(107, 37);
             this.btnAddFile.TabIndex = 3;
             this.btnAddFile.Text = "Add Files";
+            this.btnAddFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddFile.UseVisualStyleBackColor = true;
             this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
             // 
             // btnClearList
             // 
-            this.btnClearList.Location = new System.Drawing.Point(174, 12);
+            this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
+            this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearList.Location = new System.Drawing.Point(125, 5);
             this.btnClearList.Name = "btnClearList";
-            this.btnClearList.Size = new System.Drawing.Size(90, 49);
+            this.btnClearList.Size = new System.Drawing.Size(105, 37);
             this.btnClearList.TabIndex = 4;
             this.btnClearList.Text = "Clear File List";
+            this.btnClearList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClearList.UseVisualStyleBackColor = true;
             this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
             // 
@@ -109,18 +121,21 @@
             // 
             // pbFiles
             // 
-            this.pbFiles.Location = new System.Drawing.Point(270, 12);
+            this.pbFiles.Location = new System.Drawing.Point(236, 8);
             this.pbFiles.Name = "pbFiles";
-            this.pbFiles.Size = new System.Drawing.Size(211, 49);
+            this.pbFiles.Size = new System.Drawing.Size(245, 34);
             this.pbFiles.TabIndex = 7;
             // 
             // btnCombineITextSharp
             // 
-            this.btnCombineITextSharp.Location = new System.Drawing.Point(487, 38);
+            this.btnCombineITextSharp.Image = ((System.Drawing.Image)(resources.GetObject("btnCombineITextSharp.Image")));
+            this.btnCombineITextSharp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCombineITextSharp.Location = new System.Drawing.Point(487, 48);
             this.btnCombineITextSharp.Name = "btnCombineITextSharp";
-            this.btnCombineITextSharp.Size = new System.Drawing.Size(169, 23);
+            this.btnCombineITextSharp.Size = new System.Drawing.Size(169, 34);
             this.btnCombineITextSharp.TabIndex = 9;
             this.btnCombineITextSharp.Text = "Combine Files (iTextSharp)";
+            this.btnCombineITextSharp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCombineITextSharp.UseVisualStyleBackColor = true;
             this.btnCombineITextSharp.Click += new System.EventHandler(this.btnCombineITextSharp_Click);
             // 

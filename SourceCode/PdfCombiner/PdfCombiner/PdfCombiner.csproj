@@ -91,10 +91,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AscendingSortIcon.png" />
-    <Content Include="DeleteIcon.png" />
-    <Content Include="DeleteIcon2.png" />
-    <Content Include="DescendingSortIcon.png" />
+    <Content Include="Icons\AddIcon.png" />
+    <Content Include="Icons\AscendingSortIcon.png" />
+    <Content Include="Icons\CombineIcon.png" />
+    <Content Include="Icons\DeleteIcon.png" />
+    <Content Include="Icons\DeleteIcon2.png" />
+    <Content Include="Icons\DeleteIcon3.png" />
+    <Content Include="Icons\DescendingSortIcon.png" />
+    <Content Include="Icons\FileIcon.png" />
+    <Content Include="Icons\FolderIcon.png" />
+    <Content Include="Icons\PdfIcon1.png" />
+    <Content Include="Icons\PdfIcon2.png" />
+    <Content Include="Icons\PdfIcon3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
