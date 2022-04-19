@@ -26,7 +26,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        private static void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
@@ -145,7 +145,7 @@ namespace PdfCombiner
                         var result = dialogExport.ShowDialog();
                         if (result == DialogResult.OK && !string.IsNullOrEmpty(dialogExport.SelectedPath))
                         {
-                            var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid().ToString() + ".pdf";
+                            var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
                             using (var outputFile = new PdfDocument())
                             {
                                 outputFile.Options.CompressContentStreams = true;
@@ -219,7 +219,7 @@ namespace PdfCombiner
                         var result = dialogExport.ShowDialog();
                         if (result == DialogResult.OK && !string.IsNullOrEmpty(dialogExport.SelectedPath))
                         {
-                            var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid().ToString() + ".pdf";
+                            var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
                             var fileCount = lbFiles.Items.Count;
                             var combinedFiles = 0;
 
@@ -298,7 +298,7 @@ namespace PdfCombiner
 
         /// <summary>
         /// This is used to delete selected items in listbox
-        /// When menu item Delete is clicked and opened dialog 
+        /// When menu item Delete is clicked and opened dialog
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
@@ -431,7 +431,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private void lbFiles_DragOver(object sender, DragEventArgs e)
+        private static void lbFiles_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }

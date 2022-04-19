@@ -16,4 +16,3 @@ C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.csproj.CopyComplete
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.exe
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.pdb
-C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.csprojAssemblyReference.cache

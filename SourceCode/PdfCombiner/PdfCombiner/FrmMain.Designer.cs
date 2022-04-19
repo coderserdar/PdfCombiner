@@ -107,7 +107,7 @@
             this.lbFiles.Size = new System.Drawing.Size(644, 186);
             this.lbFiles.TabIndex = 5;
             this.lbFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragDrop);
-            this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragOver);
+            this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(lbFiles_DragOver);
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             this.lbFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbFiles_MouseDown);
             // 
@@ -188,7 +188,7 @@
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(FrmMain_FormClosed);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.menuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
