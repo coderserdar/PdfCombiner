@@ -371,7 +371,7 @@ namespace PdfCombiner
         }
 
         /// <summary>
-        /// This method is used to order elements in listbox ascending
+        /// This method is used to order elements in listbox descending by name
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
@@ -387,7 +387,7 @@ namespace PdfCombiner
         /// This method is used to order items in listbox
         /// And return them with the given order as parametre
         /// </summary>
-        /// <param name="lb">ListBox info</param>
+        /// <param name="lb">ListBox Info</param>
         /// <param name="ascending">Order Type is Ascending Or Not</param>
         private static ListBox SortItems(ListBox lb, bool ascending)
         {
@@ -404,29 +404,44 @@ namespace PdfCombiner
         #endregion
 
         #region Drag Drop Item For Order Methods
+
+        /// <summary>
+        /// This is used to control mouse actions and if that is not right click
+        /// Start to drag and drop item in listbox
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void lbFiles_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button.Equals(MouseButtons.Right))
-            {
-                //menuStrip.Show();
-            }
-            else
+            if (!e.Button.Equals(MouseButtons.Right))
             {
                 if (this.lbFiles.SelectedItem == null) return;
                 this.lbFiles.DoDragDrop(this.lbFiles.SelectedItem, DragDropEffects.Move);
             }
         }
 
+        /// <summary>
+        /// This is used to give effect while dragging and dropping an item in listbox
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
         private void lbFiles_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
 
+        /// <summary>
+        /// This is used to drag and drop an item in listbox
+        /// Which is used to order books and combine them with that order
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>m>
         private void lbFiles_DragDrop(object sender, DragEventArgs e)
         {
             Point point = lbFiles.PointToClient(new Point(e.X, e.Y));
             int index = this.lbFiles.IndexFromPoint(point);
             if (index < 0) index = this.lbFiles.Items.Count - 1;
+            // type of string because file names stored in string in listbox
             object data = e.Data.GetData(typeof(string));
             this.lbFiles.Items.Remove(data);
             this.lbFiles.Items.Insert(index, data);
