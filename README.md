@@ -13,9 +13,10 @@ In this app you can do;
  - Add PDF files within a selected Folder with Folder Dialog
  	+ You will add the PDF files recursively, it adds the files in subfolders.
  - In file list (With right click, you can see menu items for)
-    + Deleting selected files
+    + *Deleting selected files*
     + Ordering files by path
-       * Ascending or descending
+       * *Ascending* or *descending*
+ - You can order the books in listbox with *drag drop*
  - Delete the files which you don't want to combine in your file list
  - Combine files via **PdfSharp**
  - Combine files via **iTextSharp**
@@ -28,6 +29,25 @@ You can look up the source code's documentation in [Documentation](https://githu
 
 And you can look up screenshots like 
 
+**v2**
+
+<table>
+   <tr>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_01.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_02.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_03.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_04.png?raw=true"></td>
+   </tr>
+   <tr>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_05.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_06.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_07.png?raw=true"></td>
+      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v2/App_Screens_08.png?raw=true"></td>
+   </tr>
+</table>
+
+**v1**
+
 <table>
    <tr>
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_01.png?raw=true"></td>
@@ -39,6 +59,5 @@ And you can look up screenshots like
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_05.png?raw=true"></td>
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_06.png?raw=true"></td>
       <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_07.png?raw=true"></td>
-      <td><img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/v1/App_Screens_08.png?raw=true"></td>
    </tr>
 </table>
