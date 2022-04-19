@@ -137,9 +137,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                {
                     MessageBox.Show("There must be at least 2 PDF files to combine", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -148,42 +146,46 @@ namespace PdfCombiner
                         if (result == DialogResult.OK && !string.IsNullOrEmpty(dialogExport.SelectedPath))
                         {
                             var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid().ToString() + ".pdf";
-                            var outputFile = new PdfDocument();
-                            outputFile.Options.CompressContentStreams = true;
-                            outputFile.Options.EnableCcittCompressionForBilevelImages = true;
-                            outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
-                            var fileCount = lbFiles.Items.Count;
-                            var combinedFiles = 0;
-
-                            for (int i = 0; i < lbFiles.Items.Count; i++)
+                            using (var outputFile = new PdfDocument())
                             {
-                                try
+                                outputFile.Options.CompressContentStreams = true;
+                                outputFile.Options.EnableCcittCompressionForBilevelImages = true;
+                                outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
+                                var fileCount = lbFiles.Items.Count;
+                                var combinedFiles = 0;
+
+                                for (int i = 0; i < lbFiles.Items.Count; i++)
                                 {
-                                    var inputDocument = PdfReader.Open(lbFiles.Items[i].ToString(), PdfDocumentOpenMode.Import);
-                                    var count = inputDocument.PageCount;
-                                    for (int idx = 0; idx < count; idx++)
+                                    try
                                     {
-                                        var page = inputDocument.Pages[idx];
-                                        outputFile.AddPage(page);
+                                        var inputDocument = PdfReader.Open(lbFiles.Items[i].ToString(), PdfDocumentOpenMode.Import);
+                                        var count = inputDocument.PageCount;
+                                        for (int idx = 0; idx < count; idx++)
+                                        {
+                                            var page = inputDocument.Pages[idx];
+                                            outputFile.AddPage(page);
+                                        }
+                                        inputDocument.Close();
+                                        combinedFiles++;
                                     }
-                                    inputDocument.Close();
-                                    combinedFiles++;
-                                }
-                                catch (Exception)
-                                {
-                                    fileCount--;
-                                }
+                                    catch (Exception)
+                                    {
+                                        fileCount--;
+                                    }
 
-                                pbFiles.Value = (combinedFiles * 100 / fileCount);
-                                if (pbFiles.Value > pbFiles.Maximum)
-                                    pbFiles.Value = pbFiles.Maximum;
+                                    pbFiles.Value = (combinedFiles * 100 / fileCount);
+                                    if (pbFiles.Value > pbFiles.Maximum)
+                                        pbFiles.Value = pbFiles.Maximum;
+                                    ActiveForm.Text = "%" + pbFiles.Value;
+                                }
+                                outputFile.Save(outputFileName);
+                                outputFile.Close();
+
+                                MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            outputFile.Save(outputFileName);
-                            outputFile.Close();
-
-                            MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             pbFiles.Value = pbFiles.Minimum;
+                            ActiveForm.Text = AppTitle;
                         }
                     }
                 }
@@ -192,6 +194,7 @@ namespace PdfCombiner
             {
                 MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pbFiles.Value = pbFiles.Minimum;
+                ActiveForm.Text = AppTitle;
             }
         }
 
@@ -208,9 +211,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                {
                     MessageBox.Show("There must be at least 2 PDF files to combine", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -225,43 +226,47 @@ namespace PdfCombiner
                             var outputFile = new Document();
                             using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
                             {
-                                var pdfWriter = new iTextSharp.text.pdf.PdfCopy(outputFile, outputFileStream);
-                                if (pdfWriter == null)
+                                using (var pdfWriter = new iTextSharp.text.pdf.PdfCopy(outputFile, outputFileStream))
                                 {
-                                    return;
-                                }
-                                pdfWriter.SetFullCompression();
-                                outputFile.Open();
-                                for (int i = 0; i < lbFiles.Items.Count; i++)
-                                {
-                                    try
+                                    if (pdfWriter == null)
                                     {
-                                        var pdfReader = new iTextSharp.text.pdf.PdfReader(lbFiles.Items[i].ToString());
-                                        pdfReader.ConsolidateNamedDestinations();
-                                        for (int j = 1; j <= pdfReader.NumberOfPages; j++)
+                                        return;
+                                    }
+                                    pdfWriter.SetFullCompression();
+                                    outputFile.Open();
+                                    for (int i = 0; i < lbFiles.Items.Count; i++)
+                                    {
+                                        try
                                         {
-                                            var page = pdfWriter.GetImportedPage(pdfReader, j);
-                                            pdfWriter.AddPage(page);
+                                            var pdfReader = new iTextSharp.text.pdf.PdfReader(lbFiles.Items[i].ToString());
+                                            pdfReader.ConsolidateNamedDestinations();
+                                            for (int j = 1; j <= pdfReader.NumberOfPages; j++)
+                                            {
+                                                var page = pdfWriter.GetImportedPage(pdfReader, j);
+                                                pdfWriter.AddPage(page);
+                                            }
+                                            pdfReader.Close();
+                                            combinedFiles++;
                                         }
-                                        pdfReader.Close();
-                                        combinedFiles++;
-                                    }
-                                    catch (Exception)
-                                    {
-                                        fileCount--;
-                                    }
+                                        catch (Exception)
+                                        {
+                                            fileCount--;
+                                        }
 
-                                    pbFiles.Value = (combinedFiles * 100 / fileCount);
-                                    if (pbFiles.Value > pbFiles.Maximum)
-                                        pbFiles.Value = pbFiles.Maximum;
+                                        pbFiles.Value = (combinedFiles * 100 / fileCount);
+                                        if (pbFiles.Value > pbFiles.Maximum)
+                                            pbFiles.Value = pbFiles.Maximum;
+                                        ActiveForm.Text = "%" + pbFiles.Value;
+                                    }
+                                    pdfWriter.Close();
                                 }
-                                pdfWriter.Close();
                                 outputFile.Close();
                             }
 
                             MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             pbFiles.Value = pbFiles.Minimum;
+                            ActiveForm.Text = AppTitle;
                         }
                     }
                 }
@@ -270,6 +275,7 @@ namespace PdfCombiner
             {
                 MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pbFiles.Value = pbFiles.Minimum;
+                ActiveForm.Text = AppTitle;
             }
         }
 
@@ -387,18 +393,18 @@ namespace PdfCombiner
         /// This method is used to order items in listbox
         /// And return them with the given order as parametre
         /// </summary>
-        /// <param name="lb">ListBox Info</param>
+        /// <param name="listBox">ListBox Info</param>
         /// <param name="ascending">Order Type is Ascending Or Not</param>
-        private static ListBox SortItems(ListBox lb, bool ascending)
+        private static ListBox SortItems(ListBox listBox, bool ascending)
         {
             List<object> items;
-            items = lb.Items.OfType<object>().ToList();
-            lb.Items.Clear();
+            items = listBox.Items.OfType<object>().ToList();
+            listBox.Items.Clear();
             if (ascending)
-                lb.Items.AddRange(items.OrderBy(i => i).ToArray());
+                listBox.Items.AddRange(items.OrderBy(i => i).ToArray());
             else
-                lb.Items.AddRange(items.OrderByDescending(i => i).ToArray());
-            return lb;
+                listBox.Items.AddRange(items.OrderByDescending(i => i).ToArray());
+            return listBox;
         }
 
         #endregion
@@ -415,8 +421,8 @@ namespace PdfCombiner
         {
             if (!e.Button.Equals(MouseButtons.Right))
             {
-                if (this.lbFiles.SelectedItem == null) return;
-                this.lbFiles.DoDragDrop(this.lbFiles.SelectedItem, DragDropEffects.Move);
+                if (lbFiles.SelectedItem == null) return;
+                lbFiles.DoDragDrop(lbFiles.SelectedItem, DragDropEffects.Move);
             }
         }
 
@@ -438,11 +444,11 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>m>
         private void lbFiles_DragDrop(object sender, DragEventArgs e)
         {
-            Point point = lbFiles.PointToClient(new Point(e.X, e.Y));
-            int index = this.lbFiles.IndexFromPoint(point);
+            var point = lbFiles.PointToClient(new Point(e.X, e.Y));
+            var index = this.lbFiles.IndexFromPoint(point);
             if (index < 0) index = this.lbFiles.Items.Count - 1;
             // type of string because file names stored in string in listbox
-            object data = e.Data.GetData(typeof(string));
+            var data = e.Data.GetData(typeof(string));
             this.lbFiles.Items.Remove(data);
             this.lbFiles.Items.Insert(index, data);
         }
