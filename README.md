@@ -16,6 +16,8 @@ In this app you can do;
     + *Deleting selected files*
     + Ordering files by path
        * *Ascending* or *descending*
+    + Ordering files by file name
+       * *Ascending* or *descending*
  - You can order the books in listbox with *drag drop*
  - Delete the files which you don't want to combine in your file list
  - Combine files via **PdfSharp**
