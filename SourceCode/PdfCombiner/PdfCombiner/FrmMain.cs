@@ -368,7 +368,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private void menuItemOrderAscending_Click(object sender, EventArgs e)
+        private void menuItemOrderByPathAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, true);
@@ -381,7 +381,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private void menuItemOrderDescending_Click(object sender, EventArgs e)
+        private void menuItemOrderByPathDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, false);
@@ -453,5 +453,6 @@ namespace PdfCombiner
             this.lbFiles.Items.Insert(index, data);
         }
         #endregion
+
     }
 }

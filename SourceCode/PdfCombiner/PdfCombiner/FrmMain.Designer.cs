@@ -40,8 +40,8 @@
             this.btnCombineITextSharp = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemOrderAscending = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemOrderDescending = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderByPathAscending = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderByPathDescending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,34 +143,34 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemDelete,
-            this.menuItemOrderAscending,
-            this.menuItemOrderDescending});
+            this.menuItemOrderByPathAscending,
+            this.menuItemOrderByPathDescending});
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(178, 70);
+            this.menuStrip.Size = new System.Drawing.Size(221, 70);
             // 
             // menuItemDelete
             // 
             this.menuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuItemDelete.Image")));
             this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(177, 22);
+            this.menuItemDelete.Size = new System.Drawing.Size(220, 22);
             this.menuItemDelete.Text = "Delete";
             this.menuItemDelete.Click += new System.EventHandler(this.menuItemDelete_Click);
             // 
-            // menuItemOrderAscending
+            // menuItemOrderByPathAscending
             // 
-            this.menuItemOrderAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderAscending.Image")));
-            this.menuItemOrderAscending.Name = "menuItemOrderAscending";
-            this.menuItemOrderAscending.Size = new System.Drawing.Size(177, 22);
-            this.menuItemOrderAscending.Text = "Order (Ascending)";
-            this.menuItemOrderAscending.Click += new System.EventHandler(this.menuItemOrderAscending_Click);
+            this.menuItemOrderByPathAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathAscending.Image")));
+            this.menuItemOrderByPathAscending.Name = "menuItemOrderByPathAscending";
+            this.menuItemOrderByPathAscending.Size = new System.Drawing.Size(220, 22);
+            this.menuItemOrderByPathAscending.Text = "Order By Path (Ascending)";
+            this.menuItemOrderByPathAscending.Click += new System.EventHandler(this.menuItemOrderByPathAscending_Click);
             // 
-            // menuItemOrderDescending
+            // menuItemOrderByPathDescending
             // 
-            this.menuItemOrderDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderDescending.Image")));
-            this.menuItemOrderDescending.Name = "menuItemOrderDescending";
-            this.menuItemOrderDescending.Size = new System.Drawing.Size(177, 22);
-            this.menuItemOrderDescending.Text = "Order (Descending)";
-            this.menuItemOrderDescending.Click += new System.EventHandler(this.menuItemOrderDescending_Click);
+            this.menuItemOrderByPathDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathDescending.Image")));
+            this.menuItemOrderByPathDescending.Name = "menuItemOrderByPathDescending";
+            this.menuItemOrderByPathDescending.Size = new System.Drawing.Size(220, 22);
+            this.menuItemOrderByPathDescending.Text = "Order By Path (Descending)";
+            this.menuItemOrderByPathDescending.Click += new System.EventHandler(this.menuItemOrderByPathDescending_Click);
             // 
             // FrmMain
             // 
@@ -208,8 +208,8 @@
         private System.Windows.Forms.Button btnCombineITextSharp;
         private System.Windows.Forms.ContextMenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
-        private System.Windows.Forms.ToolStripMenuItem menuItemOrderAscending;
-        private System.Windows.Forms.ToolStripMenuItem menuItemOrderDescending;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderByPathAscending;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderByPathDescending;
     }
 }
 

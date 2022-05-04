@@ -192,7 +192,7 @@
         0NFjIAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="menuItemOrderAscending.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="menuItemOrderByPathAscending.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABGdBTUEAALGPC/xhBQAAAQJJREFUSEvd
         1TGKAjEUxvGxcEU9gGBrZWW7xR5ADyB2ggew9ggewtbW0kLsVrTUi8hWu5WF/iMkfEocEzCL+sGvmGRe
@@ -202,7 +202,7 @@
         0KlTL/EXTpksOwHPjs4sCzpfZAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="menuItemOrderDescending.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="menuItemOrderByPathDescending.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABGdBTUEAALGPC/xhBQAAAP1JREFUSEvd
         1T8OAUEUx/FVIDiARKtSaRUOwAFEJ3EAtSM4hFarVIiOUHIRUVEp+I5kJs9msvsm2SX8kk+x8+9lNy+z
