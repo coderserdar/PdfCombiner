@@ -26,7 +26,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private static void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
@@ -364,38 +364,64 @@ namespace PdfCombiner
         #region Order Item Methods
 
         /// <summary>
-        /// This method is used to order elements in listbox ascending
+        /// This method is used to order elements in listbox ascending by full path
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
         private void menuItemOrderByPathAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItems(lbFiles, true);
+                lbFiles = SortItemsByPath(lbFiles, true);
             else
                 MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
-        /// This method is used to order elements in listbox descending by name
+        /// This method is used to order elements in listbox descending by full path
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
         private void menuItemOrderByPathDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItems(lbFiles, false);
+                lbFiles = SortItemsByPath(lbFiles, false);
             else
                 MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
-        /// This method is used to order items in listbox
+        /// This method is used to order elements in listbox ascending by file name
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderByNameAscending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItemsByName(lbFiles, true);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to order elements in listbox descending by file name
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void menuItemOrderByNameDescending_Click(object sender, EventArgs e)
+        {
+            if (lbFiles.Items.Count > 0)
+                lbFiles = SortItemsByName(lbFiles, false);
+            else
+                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to order items by full path in listbox
         /// And return them with the given order as parametre
         /// </summary>
         /// <param name="listBox">ListBox Info</param>
         /// <param name="ascending">Order Type is Ascending Or Not</param>
-        private static ListBox SortItems(ListBox listBox, bool ascending)
+        private static ListBox SortItemsByPath(ListBox listBox, bool ascending)
         {
             List<object> items;
             items = listBox.Items.OfType<object>().ToList();
@@ -404,6 +430,38 @@ namespace PdfCombiner
                 listBox.Items.AddRange(items.OrderBy(i => i).ToArray());
             else
                 listBox.Items.AddRange(items.OrderByDescending(i => i).ToArray());
+            return listBox;
+        }
+
+        /// <summary>
+        /// This method is used to order items by file name in listbox
+        /// And return them with the given order as parametre
+        /// </summary>
+        /// <param name="listBox">ListBox Info</param>
+        /// <param name="ascending">Order Type is Ascending Or Not</param>
+        private static ListBox SortItemsByName(ListBox listBox, bool ascending)
+        {
+            var fileNameList = new List<string>();
+            List<object> items;
+            items = listBox.Items.OfType<object>().ToList();
+            const char c = '\u005c';
+            foreach (var item in items)
+            {
+                var fullPath = item.ToString();
+                var list = fullPath.Split(c).ToList();
+                if (list.Count > 0)
+                    fileNameList.Add(list[list.Count - 1]);
+            }
+
+            if (ascending)
+                fileNameList = fileNameList.OrderBy(j => j).ToList();
+            else
+                fileNameList = fileNameList.OrderByDescending(j => j).ToList();
+
+            listBox.Items.Clear();
+            foreach (var item in fileNameList)
+                listBox.Items.Add(items.First(j => j.ToString().EndsWith(item)));
+
             return listBox;
         }
 
@@ -431,7 +489,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="sender">The sender info (For example Main Form)</param>
         /// <param name="e">Event Arguments</param>
-        private static void lbFiles_DragOver(object sender, DragEventArgs e)
+        private void lbFiles_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }

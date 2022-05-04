@@ -42,6 +42,8 @@
             this.menuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOrderByPathAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOrderByPathDescending = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderByNameAscending = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemOrderByNameDescending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +109,7 @@
             this.lbFiles.Size = new System.Drawing.Size(644, 186);
             this.lbFiles.TabIndex = 5;
             this.lbFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragDrop);
-            this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(lbFiles_DragOver);
+            this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragOver);
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             this.lbFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbFiles_MouseDown);
             // 
@@ -144,15 +146,17 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemDelete,
             this.menuItemOrderByPathAscending,
-            this.menuItemOrderByPathDescending});
+            this.menuItemOrderByPathDescending,
+            this.menuItemOrderByNameAscending,
+            this.menuItemOrderByNameDescending});
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(221, 70);
+            this.menuStrip.Size = new System.Drawing.Size(229, 114);
             // 
             // menuItemDelete
             // 
             this.menuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuItemDelete.Image")));
             this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(220, 22);
+            this.menuItemDelete.Size = new System.Drawing.Size(228, 22);
             this.menuItemDelete.Text = "Delete";
             this.menuItemDelete.Click += new System.EventHandler(this.menuItemDelete_Click);
             // 
@@ -160,7 +164,7 @@
             // 
             this.menuItemOrderByPathAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathAscending.Image")));
             this.menuItemOrderByPathAscending.Name = "menuItemOrderByPathAscending";
-            this.menuItemOrderByPathAscending.Size = new System.Drawing.Size(220, 22);
+            this.menuItemOrderByPathAscending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByPathAscending.Text = "Order By Path (Ascending)";
             this.menuItemOrderByPathAscending.Click += new System.EventHandler(this.menuItemOrderByPathAscending_Click);
             // 
@@ -168,9 +172,25 @@
             // 
             this.menuItemOrderByPathDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathDescending.Image")));
             this.menuItemOrderByPathDescending.Name = "menuItemOrderByPathDescending";
-            this.menuItemOrderByPathDescending.Size = new System.Drawing.Size(220, 22);
+            this.menuItemOrderByPathDescending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByPathDescending.Text = "Order By Path (Descending)";
             this.menuItemOrderByPathDescending.Click += new System.EventHandler(this.menuItemOrderByPathDescending_Click);
+            // 
+            // menuItemOrderByNameAscending
+            // 
+            this.menuItemOrderByNameAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByNameAscending.Image")));
+            this.menuItemOrderByNameAscending.Name = "menuItemOrderByNameAscending";
+            this.menuItemOrderByNameAscending.Size = new System.Drawing.Size(228, 22);
+            this.menuItemOrderByNameAscending.Text = "Order By Name (Ascending)";
+            this.menuItemOrderByNameAscending.Click += new System.EventHandler(this.menuItemOrderByNameAscending_Click);
+            // 
+            // menuItemOrderByNameDescending
+            // 
+            this.menuItemOrderByNameDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByNameDescending.Image")));
+            this.menuItemOrderByNameDescending.Name = "menuItemOrderByNameDescending";
+            this.menuItemOrderByNameDescending.Size = new System.Drawing.Size(228, 22);
+            this.menuItemOrderByNameDescending.Text = "Order By Name (Descending)";
+            this.menuItemOrderByNameDescending.Click += new System.EventHandler(this.menuItemOrderByNameDescending_Click);
             // 
             // FrmMain
             // 
@@ -188,7 +208,7 @@
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(FrmMain_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.menuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -210,6 +230,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemDelete;
         private System.Windows.Forms.ToolStripMenuItem menuItemOrderByPathAscending;
         private System.Windows.Forms.ToolStripMenuItem menuItemOrderByPathDescending;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderByNameAscending;
+        private System.Windows.Forms.ToolStripMenuItem menuItemOrderByNameDescending;
     }
 }
 
