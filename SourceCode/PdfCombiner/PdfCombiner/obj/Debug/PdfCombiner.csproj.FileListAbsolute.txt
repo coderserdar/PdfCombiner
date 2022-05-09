@@ -17,3 +17,5 @@ C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.exe
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.pdb
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.csprojAssemblyReference.cache
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-en.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-tr.resources

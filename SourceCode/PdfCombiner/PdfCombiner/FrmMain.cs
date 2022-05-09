@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace PdfCombiner
 {
     public partial class FrmMain : Form
     {
-        public const string AppTitle = "PDF Combiner";
+        public ResourceManager resource;
 
         public FrmMain()
         {
@@ -28,7 +30,7 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MessageBox.Show("Thanks for using this app", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(resource.GetString("ThanksMessage"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
         }
 
@@ -41,6 +43,27 @@ namespace PdfCombiner
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             lbFiles.ContextMenuStrip = menuStrip;
+            resource = new ResourceManager("PdfCombiner.Resources.AppResources-en", Assembly.GetExecutingAssembly());
+            FormMembersNameInitialization();
+        }
+
+        /// <summary>
+        /// This method is used to change text of form members by the
+        /// Resource file which is selected
+        /// </summary>
+        private void FormMembersNameInitialization()
+        {
+            ActiveForm.Text = resource.GetString("AppTitle");
+            btnAddFile.Text = resource.GetString("AddFile");
+            btnAddFolder.Text = resource.GetString("AddFolder");
+            btnClearList.Text = resource.GetString("ClearFileList");
+            btnCombineITextSharp.Text = resource.GetString("CombineFilesITextSharp");
+            btnCombinePdfSharp.Text = resource.GetString("CombineFilesPdfSharp");
+            menuItemDelete.Text = resource.GetString("Delete");
+            menuItemOrderByPathAscending.Text = resource.GetString("OrderByPathAscending");
+            menuItemOrderByPathDescending.Text = resource.GetString("OrderByPathDescending");
+            menuItemOrderByNameAscending.Text = resource.GetString("OrderByNameAscending");
+            menuItemOrderByNameDescending.Text = resource.GetString("OrderByNameDescending");
         }
 
         #endregion
@@ -72,7 +95,7 @@ namespace PdfCombiner
                             addedFileCount++;
                         }
                     }
-                    MessageBox.Show(addedFileCount + " file/s successfully added to the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(addedFileCount + resource.GetString("FileAddMessage"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -115,7 +138,7 @@ namespace PdfCombiner
                             addedFileCount++;
                         }
                     }
-                    MessageBox.Show(addedFileCount + " file/s successfully added to the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(addedFileCount + resource.GetString("FileAddMessage"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -137,7 +160,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                    MessageBox.Show("There must be at least 2 PDF files to combine", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(resource.GetString("CombineWarning"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -181,20 +204,20 @@ namespace PdfCombiner
                                 outputFile.Save(outputFileName);
                                 outputFile.Close();
 
-                                MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(fileCount + resource.GetString("CombineFileMessage") + outputFileName, resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
 
                             pbFiles.Value = pbFiles.Minimum;
-                            ActiveForm.Text = AppTitle;
+                            ActiveForm.Text = resource.GetString("AppTitle");
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("CombineErrorMessage") + ex.GetAllMessages(), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = AppTitle;
+                ActiveForm.Text = resource.GetString("AppTitle");
             }
         }
 
@@ -211,7 +234,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                    MessageBox.Show("There must be at least 2 PDF files to combine", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(resource.GetString("CombineWarning"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -263,19 +286,19 @@ namespace PdfCombiner
                                 outputFile.Close();
                             }
 
-                            MessageBox.Show(fileCount + " PDF files successfully combined in " + outputFileName, AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(fileCount + resource.GetString("CombineFileMessage") + outputFileName, resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             pbFiles.Value = pbFiles.Minimum;
-                            ActiveForm.Text = AppTitle;
+                            ActiveForm.Text = resource.GetString("AppTitle");
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There is an error while combining PDF files in list. Details: " + ex.GetAllMessages(), AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("CombineErrorMessage") + ex.GetAllMessages(), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = AppTitle;
+                ActiveForm.Text = resource.GetString("AppTitle");
             }
         }
 
@@ -309,15 +332,15 @@ namespace PdfCombiner
                 if (lbFiles.SelectedItems.Count > 0)
                 {
                     var deleteDialog = new DialogResult();
-                    deleteDialog = MessageBox.Show("You are about to delete " + lbFiles.SelectedItems.Count + " files in listbox. Are you sure?", AppTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    deleteDialog = MessageBox.Show(resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count + resource.GetString("DeleteWarning2"), resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (deleteDialog == DialogResult.Yes)
                         DeleteFilesFromListBox();
                 }
                 else
-                    MessageBox.Show("There is no selected files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(resource.GetString("NoSelectedFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("NoFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -344,7 +367,7 @@ namespace PdfCombiner
             {
                 lbFiles.Items.Add(item);
             }
-            MessageBox.Show(fileCount + " file/s are deleted from the list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(fileCount + resource.GetString("DeleteFileMessage"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -356,7 +379,7 @@ namespace PdfCombiner
         {
             var fileCount = lbFiles.Items.Count;
             lbFiles.Items.Clear();
-            MessageBox.Show(fileCount + " file/s successfully deleted from the list", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(fileCount + resource.GetString("DeleteFileMessage"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
@@ -373,7 +396,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByPath(lbFiles, true);
             else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("NoFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -386,7 +409,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByPath(lbFiles, false);
             else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("NoFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -399,7 +422,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByName(lbFiles, true);
             else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("NoFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -412,7 +435,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByName(lbFiles, false);
             else
-                MessageBox.Show("There is no files in list.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resource.GetString("NoFile"), resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
