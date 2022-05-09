@@ -118,78 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddFile" xml:space="preserve">
-    <value>Add Files</value>
+    <value>Добавить файлы</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Add Folder</value>
+    <value>Добавить папку</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>PDF Combiner</value>
+    <value>PDF Комбайнер</value>
   </data>
   <data name="ClearFileList" xml:space="preserve">
-    <value>Clear File List</value>
+    <value>Очистить список файлов</value>
   </data>
   <data name="CombineErrorMessage" xml:space="preserve">
-    <value>There is an error while combining PDF files in list. Details: </value>
+    <value>Возникла ошибка при объединении файлов PDF в список. Подробности:</value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF files successfully combined in </value>
+    <value> PDF-файлы успешно объединены в </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
-    <value>Combine Files (iTextSharp)</value>
+    <value>Объединить файлы (iTextSharp)</value>
   </data>
   <data name="CombineFilesPdfSharp" xml:space="preserve">
-    <value>Combine Files (PdfSharp)</value>
+    <value>Объединить файлы (PdfSharp)</value>
   </data>
   <data name="CombineWarning" xml:space="preserve">
-    <value>There must be at least 2 PDF files to combine</value>
+    <value>Для объединения должно быть как минимум 2 файла PDF.</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Удалить</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> file/s successfully deleted from the list.</value>
+    <value> файл/ы успешно удалены из списка.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
-    <value>You are about to delete </value>
+    <value>Вы собираетесь удалить </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> files in listbox. Are you sure?</value>
+    <value> файлы в списке. Уверены ли вы?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> file/s successfully added to the list</value>
+    <value> файл/ы успешно добавлены в список</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>язык</value>
   </data>
   <data name="NoFile" xml:space="preserve">
-    <value>There are no files in list.</value>
+    <value>В списке нет файлов.</value>
   </data>
   <data name="NoSelectedFile" xml:space="preserve">
-    <value>There are no selected files in list.</value>
+    <value>В списке нет выбранных файлов.</value>
   </data>
   <data name="OrderByNameAscending" xml:space="preserve">
-    <value>Order By Name (Ascending)</value>
+    <value>Упорядочить по имени (по возрастанию)</value>
   </data>
   <data name="OrderByNameDescending" xml:space="preserve">
-    <value>Order By Name (Descending)</value>
+    <value>Упорядочить по имени (по убыванию)</value>
   </data>
   <data name="OrderByPathAscending" xml:space="preserve">
-    <value>Order By Path (Ascending)</value>
+    <value>Упорядочить по пути (по возрастанию)</value>
   </data>
   <data name="OrderByPathDescending" xml:space="preserve">
-    <value>Order By Path (Descending)</value>
+    <value>Упорядочить по пути (по убыванию)</value>
   </data>
   <data name="ThanksMessage" xml:space="preserve">
-    <value>Thanks for using this app</value>
+    <value>Спасибо за использование этого приложения</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Select Language</value>
+    <value>Выбрать язык</value>
   </data>
   <data name="SelectPdfFile" xml:space="preserve">
-    <value>Select PDF File/s</value>
+    <value>выберите pdf-файл(ы)</value>
   </data>
   <data name="PdfFiles" xml:space="preserve">
-    <value>PDF Files</value>
+    <value>pdf файлы</value>
   </data>
 </root>

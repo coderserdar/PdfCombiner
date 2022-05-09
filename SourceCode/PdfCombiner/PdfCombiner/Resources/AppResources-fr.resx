@@ -118,78 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddFile" xml:space="preserve">
-    <value>Add Files</value>
+    <value>Ajouter Des Fichiers</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>Add Folder</value>
+    <value>Ajouter Le Dossier</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>PDF Combiner</value>
+    <value>PDF Combinateur</value>
   </data>
   <data name="ClearFileList" xml:space="preserve">
-    <value>Clear File List</value>
+    <value>Effacer La Liste Des Fichiers</value>
   </data>
   <data name="CombineErrorMessage" xml:space="preserve">
-    <value>There is an error while combining PDF files in list. Details: </value>
+    <value>Une erreur s'est produite lors de la combinaison de fichiers PDF dans la liste. Des détails: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF files successfully combined in </value>
+    <value>  Fichiers PDF combinés avec succès dans  </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
-    <value>Combine Files (iTextSharp)</value>
+    <value>Combiner Des Fichiers (iTextSharp)</value>
   </data>
   <data name="CombineFilesPdfSharp" xml:space="preserve">
-    <value>Combine Files (PdfSharp)</value>
+    <value>Combiner Des Fichiers (PdfSharp)</value>
   </data>
   <data name="CombineWarning" xml:space="preserve">
-    <value>There must be at least 2 PDF files to combine</value>
+    <value>Il doit y avoir au moins 2 fichiers PDF à combiner</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Effacer</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> file/s successfully deleted from the list.</value>
+    <value> fichier(s) supprimé(s) avec succès de la liste.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
-    <value>You are about to delete </value>
+    <value>Vous êtes sur le point de supprimer </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> files in listbox. Are you sure?</value>
+    <value> fichiers dans la liste déroulante. Es-tu sûr?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> file/s successfully added to the list</value>
+    <value> fichier(s) ajouté(s) avec succès à la liste</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Langue</value>
   </data>
   <data name="NoFile" xml:space="preserve">
-    <value>There are no files in list.</value>
+    <value>Il n'y a pas de fichiers dans la liste</value>
   </data>
   <data name="NoSelectedFile" xml:space="preserve">
-    <value>There are no selected files in list.</value>
+    <value>Il n'y a pas de fichiers sélectionnés dans la liste</value>
   </data>
   <data name="OrderByNameAscending" xml:space="preserve">
-    <value>Order By Name (Ascending)</value>
+    <value>Trier Par Nom (Ascendant)</value>
   </data>
   <data name="OrderByNameDescending" xml:space="preserve">
-    <value>Order By Name (Descending)</value>
+    <value>Trier Par Nom (Descendant)</value>
   </data>
   <data name="OrderByPathAscending" xml:space="preserve">
-    <value>Order By Path (Ascending)</value>
+    <value>Trier Par Chemin (Ascendant)</value>
   </data>
   <data name="OrderByPathDescending" xml:space="preserve">
-    <value>Order By Path (Descending)</value>
+    <value>Trier Par Chemin (Descendant)</value>
   </data>
   <data name="ThanksMessage" xml:space="preserve">
-    <value>Thanks for using this app</value>
+    <value>Merci d'utiliser cette application</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Select Language</value>
+    <value>Choisir La Langue</value>
   </data>
   <data name="SelectPdfFile" xml:space="preserve">
-    <value>Select PDF File/s</value>
+    <value>Sélectionnez le(s) fichier(s) PDF</value>
   </data>
   <data name="PdfFiles" xml:space="preserve">
-    <value>PDF Files</value>
+    <value>Fichiers PDF</value>
   </data>
 </root>

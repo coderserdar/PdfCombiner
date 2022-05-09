@@ -186,4 +186,10 @@
   <data name="SelectLanguage" xml:space="preserve">
     <value>Dil Seçiniz</value>
   </data>
+  <data name="SelectPdfFile" xml:space="preserve">
+    <value>PDF Dosya(ları) Seçiniz</value>
+  </data>
+  <data name="PdfFiles" xml:space="preserve">
+    <value>PDF Dosyaları</value>
+  </data>
 </root>

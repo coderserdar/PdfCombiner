@@ -65,9 +65,9 @@
             // 
             this.btnAddFolder.Image = ((System.Drawing.Image) (resources.GetObject("btnAddFolder.Image")));
             this.btnAddFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddFolder.Location = new System.Drawing.Point(12, 45);
+            this.btnAddFolder.Location = new System.Drawing.Point(197, 5);
             this.btnAddFolder.Name = "btnAddFolder";
-            this.btnAddFolder.Size = new System.Drawing.Size(105, 37);
+            this.btnAddFolder.Size = new System.Drawing.Size(171, 37);
             this.btnAddFolder.TabIndex = 2;
             this.btnAddFolder.Text = "Add Folder";
             this.btnAddFolder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -80,7 +80,7 @@
             this.btnAddFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddFile.Location = new System.Drawing.Point(12, 5);
             this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(105, 37);
+            this.btnAddFile.Size = new System.Drawing.Size(179, 37);
             this.btnAddFile.TabIndex = 3;
             this.btnAddFile.Text = "Add Files";
             this.btnAddFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,9 +91,9 @@
             // 
             this.btnClearList.Image = ((System.Drawing.Image) (resources.GetObject("btnClearList.Image")));
             this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClearList.Location = new System.Drawing.Point(123, 5);
+            this.btnClearList.Location = new System.Drawing.Point(12, 45);
             this.btnClearList.Name = "btnClearList";
-            this.btnClearList.Size = new System.Drawing.Size(105, 37);
+            this.btnClearList.Size = new System.Drawing.Size(179, 37);
             this.btnClearList.TabIndex = 4;
             this.btnClearList.Text = "Clear File List";
             this.btnClearList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -124,9 +124,9 @@
             // 
             // pbFiles
             // 
-            this.pbFiles.Location = new System.Drawing.Point(123, 45);
+            this.pbFiles.Location = new System.Drawing.Point(197, 45);
             this.pbFiles.Name = "pbFiles";
-            this.pbFiles.Size = new System.Drawing.Size(313, 37);
+            this.pbFiles.Size = new System.Drawing.Size(239, 37);
             this.pbFiles.TabIndex = 7;
             // 
             // btnCombineITextSharp
@@ -193,9 +193,9 @@
             this.cmbLanguage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Items.AddRange(new object[] {"TR", "EN", "DE", "FR", "RU", "ES"});
-            this.cmbLanguage.Location = new System.Drawing.Point(234, 14);
+            this.cmbLanguage.Location = new System.Drawing.Point(374, 12);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(202, 21);
+            this.cmbLanguage.Size = new System.Drawing.Size(62, 21);
             this.cmbLanguage.TabIndex = 10;
             this.cmbLanguage.Text = "Select Language";
             this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);

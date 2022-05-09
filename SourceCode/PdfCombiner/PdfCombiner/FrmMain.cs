@@ -14,7 +14,7 @@ namespace PdfCombiner
 {
     public partial class FrmMain : Form
     {
-        public ResourceManager resource;
+        public static ResourceManager resource;
 
         public FrmMain()
         {
@@ -64,7 +64,7 @@ namespace PdfCombiner
                     resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + cmbLanguage.SelectedItem.ToString().ToLower(), Assembly.GetExecutingAssembly());
                     FormMembersNameInitialization();
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     resource = new ResourceManager("PdfCombiner.Resources.AppResources-en", Assembly.GetExecutingAssembly());
                     FormMembersNameInitialization();
@@ -135,10 +135,10 @@ namespace PdfCombiner
         private static void InitializeFileDialog(OpenFileDialog dialogAddFile)
         {
             dialogAddFile.Multiselect = true;
-            dialogAddFile.Filter = "pdf files (*.pdf)|*.pdf";
+            dialogAddFile.Filter = resource.GetString("PdfFiles") + " (*.pdf)|*.pdf";
             dialogAddFile.InitialDirectory = Application.StartupPath;
-            dialogAddFile.Title = "Select PDF File/s";
-            dialogAddFile.DefaultExt = "pdf";
+            dialogAddFile.Title = resource.GetString("SelectPdfFile");
+            dialogAddFile.DefaultExt = "PDF";
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace PdfCombiner
 
         #endregion
 
-        #region Drag Drop Item For Order Methods
+        #region Item Drag and Drop Methods
 
         /// <summary>
         /// This is used to control mouse actions and if that is not right click
@@ -560,8 +560,7 @@ namespace PdfCombiner
             this.lbFiles.Items.Remove(data);
             this.lbFiles.Items.Insert(index, data);
         }
-        #endregion
-
         
+        #endregion
     }
 }
