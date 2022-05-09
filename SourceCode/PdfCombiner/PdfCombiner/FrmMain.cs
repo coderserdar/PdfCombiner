@@ -21,7 +21,7 @@ namespace PdfCombiner
             InitializeComponent();
         }
 
-        #region Form Init And Finalize Methods
+        #region Form Init, Language Settings and Finalize Methods
 
         /// <summary>
         /// This function is used to terminate application
@@ -43,10 +43,36 @@ namespace PdfCombiner
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             lbFiles.ContextMenuStrip = menuStrip;
-            resource = new ResourceManager("PdfCombiner.Resources.AppResources-en", Assembly.GetExecutingAssembly());
+            cmbLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+            resource = new ResourceManager("PdfCombiner.Resources.AppResources-tr", Assembly.GetExecutingAssembly());
             FormMembersNameInitialization();
         }
 
+        /// <summary>
+        /// This function is used to set the resource file
+        /// And with this, you can see form elements, info messages etc. with the selected
+        /// resource file contents. That is used to multi language support
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbLanguage.SelectedIndex != -1)
+            {
+                try
+                {
+                    resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + cmbLanguage.SelectedItem.ToString().ToLower(), Assembly.GetExecutingAssembly());
+                    FormMembersNameInitialization();
+                }
+                catch (Exception exception)
+                {
+                    resource = new ResourceManager("PdfCombiner.Resources.AppResources-en", Assembly.GetExecutingAssembly());
+                    FormMembersNameInitialization();
+                }
+                
+            }
+        }
+        
         /// <summary>
         /// This method is used to change text of form members by the
         /// Resource file which is selected
@@ -64,8 +90,9 @@ namespace PdfCombiner
             menuItemOrderByPathDescending.Text = resource.GetString("OrderByPathDescending");
             menuItemOrderByNameAscending.Text = resource.GetString("OrderByNameAscending");
             menuItemOrderByNameDescending.Text = resource.GetString("OrderByNameDescending");
+            cmbLanguage.Text = resource.GetString("SelectLanguage");
         }
-
+        
         #endregion
 
         #region Add Item Methods
@@ -535,5 +562,6 @@ namespace PdfCombiner
         }
         #endregion
 
+        
     }
 }

@@ -183,4 +183,7 @@
   <data name="ThanksMessage" xml:space="preserve">
     <value>Uygulamayı kullandığınız için teşekkür ederim</value>
   </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Dil Seçiniz</value>
+  </data>
 </root>

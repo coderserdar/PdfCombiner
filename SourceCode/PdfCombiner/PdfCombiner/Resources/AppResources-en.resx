@@ -183,4 +183,7 @@
   <data name="ThanksMessage" xml:space="preserve">
     <value>Thanks for using this app</value>
   </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
 </root>

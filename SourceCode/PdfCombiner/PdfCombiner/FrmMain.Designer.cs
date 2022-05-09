@@ -44,12 +44,13 @@
             this.menuItemOrderByPathDescending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOrderByNameAscending = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOrderByNameDescending = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCombinePdfSharp
             // 
-            this.btnCombinePdfSharp.Image = ((System.Drawing.Image)(resources.GetObject("btnCombinePdfSharp.Image")));
+            this.btnCombinePdfSharp.Image = ((System.Drawing.Image) (resources.GetObject("btnCombinePdfSharp.Image")));
             this.btnCombinePdfSharp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCombinePdfSharp.Location = new System.Drawing.Point(442, 5);
             this.btnCombinePdfSharp.Name = "btnCombinePdfSharp";
@@ -62,7 +63,7 @@
             // 
             // btnAddFolder
             // 
-            this.btnAddFolder.Image = ((System.Drawing.Image)(resources.GetObject("btnAddFolder.Image")));
+            this.btnAddFolder.Image = ((System.Drawing.Image) (resources.GetObject("btnAddFolder.Image")));
             this.btnAddFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddFolder.Location = new System.Drawing.Point(12, 45);
             this.btnAddFolder.Name = "btnAddFolder";
@@ -75,7 +76,7 @@
             // 
             // btnAddFile
             // 
-            this.btnAddFile.Image = ((System.Drawing.Image)(resources.GetObject("btnAddFile.Image")));
+            this.btnAddFile.Image = ((System.Drawing.Image) (resources.GetObject("btnAddFile.Image")));
             this.btnAddFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddFile.Location = new System.Drawing.Point(12, 5);
             this.btnAddFile.Name = "btnAddFile";
@@ -88,7 +89,7 @@
             // 
             // btnClearList
             // 
-            this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
+            this.btnClearList.Image = ((System.Drawing.Image) (resources.GetObject("btnClearList.Image")));
             this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClearList.Location = new System.Drawing.Point(123, 5);
             this.btnClearList.Name = "btnClearList";
@@ -130,7 +131,7 @@
             // 
             // btnCombineITextSharp
             // 
-            this.btnCombineITextSharp.Image = ((System.Drawing.Image)(resources.GetObject("btnCombineITextSharp.Image")));
+            this.btnCombineITextSharp.Image = ((System.Drawing.Image) (resources.GetObject("btnCombineITextSharp.Image")));
             this.btnCombineITextSharp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCombineITextSharp.Location = new System.Drawing.Point(442, 45);
             this.btnCombineITextSharp.Name = "btnCombineITextSharp";
@@ -143,18 +144,13 @@
             // 
             // menuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDelete,
-            this.menuItemOrderByPathAscending,
-            this.menuItemOrderByPathDescending,
-            this.menuItemOrderByNameAscending,
-            this.menuItemOrderByNameDescending});
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.menuItemDelete, this.menuItemOrderByPathAscending, this.menuItemOrderByPathDescending, this.menuItemOrderByNameAscending, this.menuItemOrderByNameDescending});
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(229, 114);
             // 
             // menuItemDelete
             // 
-            this.menuItemDelete.Image = ((System.Drawing.Image)(resources.GetObject("menuItemDelete.Image")));
+            this.menuItemDelete.Image = ((System.Drawing.Image) (resources.GetObject("menuItemDelete.Image")));
             this.menuItemDelete.Name = "menuItemDelete";
             this.menuItemDelete.Size = new System.Drawing.Size(228, 22);
             this.menuItemDelete.Text = "Delete";
@@ -162,7 +158,7 @@
             // 
             // menuItemOrderByPathAscending
             // 
-            this.menuItemOrderByPathAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathAscending.Image")));
+            this.menuItemOrderByPathAscending.Image = ((System.Drawing.Image) (resources.GetObject("menuItemOrderByPathAscending.Image")));
             this.menuItemOrderByPathAscending.Name = "menuItemOrderByPathAscending";
             this.menuItemOrderByPathAscending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByPathAscending.Text = "Order By Path (Ascending)";
@@ -170,7 +166,7 @@
             // 
             // menuItemOrderByPathDescending
             // 
-            this.menuItemOrderByPathDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByPathDescending.Image")));
+            this.menuItemOrderByPathDescending.Image = ((System.Drawing.Image) (resources.GetObject("menuItemOrderByPathDescending.Image")));
             this.menuItemOrderByPathDescending.Name = "menuItemOrderByPathDescending";
             this.menuItemOrderByPathDescending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByPathDescending.Text = "Order By Path (Descending)";
@@ -178,7 +174,7 @@
             // 
             // menuItemOrderByNameAscending
             // 
-            this.menuItemOrderByNameAscending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByNameAscending.Image")));
+            this.menuItemOrderByNameAscending.Image = ((System.Drawing.Image) (resources.GetObject("menuItemOrderByNameAscending.Image")));
             this.menuItemOrderByNameAscending.Name = "menuItemOrderByNameAscending";
             this.menuItemOrderByNameAscending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByNameAscending.Text = "Order By Name (Ascending)";
@@ -186,17 +182,30 @@
             // 
             // menuItemOrderByNameDescending
             // 
-            this.menuItemOrderByNameDescending.Image = ((System.Drawing.Image)(resources.GetObject("menuItemOrderByNameDescending.Image")));
+            this.menuItemOrderByNameDescending.Image = ((System.Drawing.Image) (resources.GetObject("menuItemOrderByNameDescending.Image")));
             this.menuItemOrderByNameDescending.Name = "menuItemOrderByNameDescending";
             this.menuItemOrderByNameDescending.Size = new System.Drawing.Size(228, 22);
             this.menuItemOrderByNameDescending.Text = "Order By Name (Descending)";
             this.menuItemOrderByNameDescending.Click += new System.EventHandler(this.menuItemOrderByNameDescending_Click);
+            // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbLanguage.FormattingEnabled = true;
+            this.cmbLanguage.Items.AddRange(new object[] {"TR", "EN", "DE", "FR", "RU", "ES"});
+            this.cmbLanguage.Location = new System.Drawing.Point(234, 14);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(202, 21);
+            this.cmbLanguage.TabIndex = 10;
+            this.cmbLanguage.Text = "Select Language";
+            this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 287);
+            this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.btnCombineITextSharp);
             this.Controls.Add(this.pbFiles);
             this.Controls.Add(this.lblDetails);
@@ -213,8 +222,9 @@
             this.menuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        public System.Windows.Forms.ComboBox cmbLanguage;
 
         #endregion
 
