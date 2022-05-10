@@ -4,6 +4,7 @@ using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,9 @@ namespace PdfCombiner
     public partial class FrmMain : Form
     {
         public static ResourceManager resource;
+
+        // Culture lists whose resources have been added to project
+        private static readonly List<string> languageList = new List<string> {"EN", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR"};
 
         public FrmMain()
         {
@@ -44,6 +48,9 @@ namespace PdfCombiner
         {
             lbFiles.ContextMenuStrip = menuStrip;
             cmbLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbLanguage.Items.Clear();
+            foreach (var item in languageList)
+                cmbLanguage.Items.Add(item);
             resource = new ResourceManager("PdfCombiner.Resources.AppResources-tr", Assembly.GetExecutingAssembly());
             FormMembersNameInitialization();
         }
@@ -61,7 +68,7 @@ namespace PdfCombiner
             {
                 try
                 {
-                    resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + cmbLanguage.SelectedItem.ToString().ToLower(), Assembly.GetExecutingAssembly());
+                    resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + cmbLanguage.SelectedItem.ToString().ToLower(new CultureInfo("en-US")), Assembly.GetExecutingAssembly());
                     FormMembersNameInitialization();
                 }
                 catch (Exception)
