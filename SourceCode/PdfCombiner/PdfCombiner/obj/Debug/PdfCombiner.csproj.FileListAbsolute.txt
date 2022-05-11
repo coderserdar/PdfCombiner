@@ -26,3 +26,5 @@ C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.pdb
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-zh.resources
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-ar.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-nl.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-pt.resources
