@@ -25,8 +25,8 @@ In this app you can do;
  - Delete the files which you don't want to combine in your file list
  - Combine files via **PdfSharp**
  - Combine files via **iTextSharp**
- - Multi Language support for **English**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese** 
- - Look the process status in the progress bar
+ - Multi Language support for **English**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese**, **Bengali**, **Indonesian**, **Indian**, **Japanese**
+ - Look the process status in the progress bar (Adding files or combining files)
  - Info messages after every operation in app
    
 # Documentation and Screenshots
