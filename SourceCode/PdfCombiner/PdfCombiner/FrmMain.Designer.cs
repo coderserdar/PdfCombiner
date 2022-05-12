@@ -191,11 +191,12 @@
             // cmbLanguage
             // 
             this.cmbLanguage.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Items.AddRange(new object[] {"TR", "EN", "DE", "FR", "RU", "ES"});
-            this.cmbLanguage.Location = new System.Drawing.Point(374, 12);
+            this.cmbLanguage.Location = new System.Drawing.Point(374, 6);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(62, 21);
+            this.cmbLanguage.Size = new System.Drawing.Size(62, 33);
             this.cmbLanguage.TabIndex = 10;
             this.cmbLanguage.Text = "Select Language";
             this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
@@ -214,6 +215,7 @@
             this.Controls.Add(this.btnAddFile);
             this.Controls.Add(this.btnAddFolder);
             this.Controls.Add(this.btnCombinePdfSharp);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDF Combiner";

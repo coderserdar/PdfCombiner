@@ -13,11 +13,11 @@ namespace PdfCombiner
         {
             var messages = exception.Message;
             if (exception.InnerException != null)
-                messages += " " + exception.InnerException.GetAllMessages();
+                messages += $" {exception.InnerException.GetAllMessages()}";
             if (!string.IsNullOrEmpty(exception.StackTrace))
-                messages += " " + exception.StackTrace;
+                messages += $" {exception.StackTrace}";
             if (!string.IsNullOrEmpty(exception.Source))
-                messages += " " + exception.Source;
+                messages += $" {exception.Source}";
             return messages;
         }
     }

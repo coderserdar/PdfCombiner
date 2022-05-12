@@ -28,3 +28,7 @@ C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-ar.resources
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-nl.resources
 C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-pt.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-in.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-id.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-jp.resources
+C:\Users\serdar\Documents\GitHub\PdfCombiner\SourceCode\PdfCombiner\PdfCombiner\obj\Debug\PdfCombiner.Resources.AppResources-bg.resources
