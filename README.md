@@ -17,6 +17,7 @@ In this app you can do;
  	+ You will add the PDF files recursively, it adds the files in subfolders.
  - In file list (With right click, you can see menu items for)
     + *Deleting selected files*
+    + *Selecting all files*
     + Ordering files by path
        * *Ascending* or *descending*
     + Ordering files by file name
