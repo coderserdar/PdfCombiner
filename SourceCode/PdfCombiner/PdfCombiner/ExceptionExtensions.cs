@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace PdfCombiner
 {
@@ -11,14 +12,15 @@ namespace PdfCombiner
         /// <returns>Detailed Error Message</returns>
         public static string GetAllMessages(this Exception exception)
         {
-            var messages = exception.Message;
+            var sb = new StringBuilder();
+            sb.Append(exception.Message);
             if (exception.InnerException != null)
-                messages += $" {exception.InnerException.GetAllMessages()}";
+                sb.Append($" {exception.InnerException.GetAllMessages()}");
             if (!string.IsNullOrEmpty(exception.StackTrace))
-                messages += $" {exception.StackTrace}";
+                sb.Append($" {exception.StackTrace}");
             if (!string.IsNullOrEmpty(exception.Source))
-                messages += $" {exception.Source}";
-            return messages;
+                sb.Append($" {exception.Source}");
+            return sb.ToString();
         }
     }
 }

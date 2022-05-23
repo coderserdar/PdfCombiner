@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PdfCombiner
+﻿namespace PdfCombiner
 {
     /// <summary>
     /// This class is used to have File's Full Path and Name
