@@ -101,6 +101,7 @@ namespace PdfCombiner
         /// </summary>
         private void FormMembersNameInitialization()
         {
+            if (_resource == null) return;
             ActiveForm.Text = _resource.GetString("AppTitle") ?? string.Empty;
             btnAddFile.Text = _resource.GetString("AddFile") ?? string.Empty;
             btnAddFolder.Text = _resource.GetString("AddFolder") ?? string.Empty;
@@ -144,7 +145,7 @@ namespace PdfCombiner
                     pbFiles.Value = addedFileCount * 100 / dialogAddFile.FileNames.Length;
                     if (pbFiles.Value > pbFiles.Maximum)
                         pbFiles.Value = pbFiles.Maximum;
-                    ActiveForm.Text = "%" + pbFiles.Value;
+                    ActiveForm.Text = @"%" + pbFiles.Value;
                 }
 
                 MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
@@ -163,7 +164,7 @@ namespace PdfCombiner
         private static void InitializeFileDialog(OpenFileDialog dialogAddFile)
         {
             dialogAddFile.Multiselect = true;
-            dialogAddFile.Filter = _resource.GetString("PdfFiles") + " (*.pdf)|*.pdf";
+            dialogAddFile.Filter = _resource.GetString("PdfFiles") + @" (*.pdf)|*.pdf";
             dialogAddFile.InitialDirectory = Application.StartupPath;
             dialogAddFile.Title = _resource.GetString("SelectPdfFile");
             dialogAddFile.DefaultExt = "PDF";
@@ -194,7 +195,7 @@ namespace PdfCombiner
                     pbFiles.Value = addedFileCount * 100 / fileNames.Length;
                     if (pbFiles.Value > pbFiles.Maximum)
                         pbFiles.Value = pbFiles.Maximum;
-                    ActiveForm.Text = "%" + pbFiles.Value;
+                    ActiveForm.Text = @"%" + pbFiles.Value;
                 }
 
                 MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
@@ -263,7 +264,7 @@ namespace PdfCombiner
                                 pbFiles.Value = combinedFiles * 100 / fileCount;
                                 if (pbFiles.Value > pbFiles.Maximum)
                                     pbFiles.Value = pbFiles.Maximum;
-                                ActiveForm.Text = "%" + pbFiles.Value;
+                                ActiveForm.Text = @"%" + pbFiles.Value;
                             }
 
                             outputFile.Save(outputFileName);
@@ -317,11 +318,6 @@ namespace PdfCombiner
                         {
                             using (var pdfWriter = new iTextSharp.text.pdf.PdfCopy(outputFile, outputFileStream))
                             {
-                                if (pdfWriter == null)
-                                {
-                                    return;
-                                }
-
                                 pdfWriter.SetFullCompression();
                                 outputFile.Open();
                                 foreach (var t in lbFiles.Items)
@@ -348,7 +344,7 @@ namespace PdfCombiner
                                     pbFiles.Value = combinedFiles * 100 / fileCount;
                                     if (pbFiles.Value > pbFiles.Maximum)
                                         pbFiles.Value = pbFiles.Maximum;
-                                    ActiveForm.Text = "%" + pbFiles.Value;
+                                    ActiveForm.Text = @"%" + pbFiles.Value;
                                 }
 
                                 pdfWriter.Close();
