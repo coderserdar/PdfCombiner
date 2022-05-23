@@ -542,22 +542,27 @@ namespace PdfCombiner
         /// <param name="ascending">Order Type is Ascending Or Not</param>
         private static ListBox SortItemsByName(ListBox listBox, bool ascending)
         {
-            var fileNameList = new List<string>();
+            var fileList = new List<FileInfo>();
             var items = listBox.Items.OfType<object>().ToList();
             const char c = '\u005c';
             foreach (var item in items)
             {
                 var fullPath = item.ToString();
                 var list = fullPath.Split(c).ToList();
-                if (list.Count > 0)
-                    fileNameList.Add(list[list.Count - 1]);
+                if (list.Count <= 0) continue;
+                var fileInfo = new FileInfo
+                {
+                    FilePath = fullPath,
+                    FileName = list[list.Count - 1]
+                };
+                fileList.Add(fileInfo);
             }
 
-            fileNameList = ascending ? fileNameList.OrderBy(j => j).ToList() : fileNameList.OrderByDescending(j => j).ToList();
+            fileList = ascending ? fileList.OrderBy(j => j.FileName).ThenBy(j =>j.FilePath).ToList() : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j =>j.FilePath).ToList();
 
             listBox.Items.Clear();
-            foreach (var item in fileNameList)
-                listBox.Items.Add(items.First(j => j.ToString().EndsWith(item)));
+            foreach (var item in fileList)
+                listBox.Items.Add(item.FilePath);
 
             return listBox;
         }

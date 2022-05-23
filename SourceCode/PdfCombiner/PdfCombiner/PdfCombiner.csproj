@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BaseException.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="FileInfo.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
