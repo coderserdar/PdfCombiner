@@ -51,9 +51,21 @@ namespace PdfCombiner
             lbFiles.ContextMenuStrip = menuStrip;
             cmbLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbLanguage.Items.Clear();
+            var cultureInfo = CultureInfo.InstalledUICulture;
+            var firstLanguage = string.Empty;
             foreach (var item in _languageList)
+            {
+                if (cultureInfo.Name.Contains(item))
+                    firstLanguage = item.ToLower(new CultureInfo("en-US"));
                 cmbLanguage.Items.Add(item);
-            _resource = new ResourceManager("PdfCombiner.Resources.AppResources-tr", Assembly.GetExecutingAssembly());
+            }
+            if (string.IsNullOrEmpty(firstLanguage))
+                firstLanguage = "tr";
+            
+            _resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + firstLanguage,
+                Assembly.GetExecutingAssembly());
+            cmbLanguage.SelectedIndex = cmbLanguage.FindStringExact(firstLanguage.ToUpper(new CultureInfo("en-US")));
+            
             FormMembersNameInitialization();
         }
 
@@ -89,18 +101,18 @@ namespace PdfCombiner
         /// </summary>
         private void FormMembersNameInitialization()
         {
-            ActiveForm.Text = _resource.GetString("AppTitle");
-            btnAddFile.Text = _resource.GetString("AddFile");
-            btnAddFolder.Text = _resource.GetString("AddFolder");
-            btnClearList.Text = _resource.GetString("ClearFileList");
-            btnCombineITextSharp.Text = _resource.GetString("CombineFilesITextSharp");
-            btnCombinePdfSharp.Text = _resource.GetString("CombineFilesPdfSharp");
-            menuItemDelete.Text = _resource.GetString("Delete");
-            menuItemOrderByPathAscending.Text = _resource.GetString("OrderByPathAscending");
-            menuItemOrderByPathDescending.Text = _resource.GetString("OrderByPathDescending");
-            menuItemOrderByNameAscending.Text = _resource.GetString("OrderByNameAscending");
-            menuItemOrderByNameDescending.Text = _resource.GetString("OrderByNameDescending");
-            cmbLanguage.Text = _resource.GetString("SelectLanguage");
+            ActiveForm.Text = _resource.GetString("AppTitle") ?? string.Empty;
+            btnAddFile.Text = _resource.GetString("AddFile") ?? string.Empty;
+            btnAddFolder.Text = _resource.GetString("AddFolder") ?? string.Empty;
+            btnClearList.Text = _resource.GetString("ClearFileList") ?? string.Empty;
+            btnCombineITextSharp.Text = _resource.GetString("CombineFilesITextSharp") ?? string.Empty;
+            btnCombinePdfSharp.Text = _resource.GetString("CombineFilesPdfSharp") ?? string.Empty;
+            menuItemDelete.Text = _resource.GetString("Delete") ?? string.Empty;
+            menuItemOrderByPathAscending.Text = _resource.GetString("OrderByPathAscending") ?? string.Empty;
+            menuItemOrderByPathDescending.Text = _resource.GetString("OrderByPathDescending") ?? string.Empty;
+            menuItemOrderByNameAscending.Text = _resource.GetString("OrderByNameAscending") ?? string.Empty;
+            menuItemOrderByNameDescending.Text = _resource.GetString("OrderByNameDescending") ?? string.Empty;
+            cmbLanguage.Text = _resource.GetString("SelectLanguage") ?? string.Empty;
         }
 
         #endregion
@@ -128,7 +140,7 @@ namespace PdfCombiner
                     if (lbFiles.Items.Contains(file)) continue;
                     lbFiles.Items.Add(file);
                     addedFileCount++;
-                    
+
                     pbFiles.Value = addedFileCount * 100 / dialogAddFile.FileNames.Length;
                     if (pbFiles.Value > pbFiles.Maximum)
                         pbFiles.Value = pbFiles.Maximum;
@@ -137,7 +149,7 @@ namespace PdfCombiner
 
                 MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
                     _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 pbFiles.Value = pbFiles.Minimum;
                 ActiveForm.Text = _resource.GetString("AppTitle");
             }
@@ -178,7 +190,7 @@ namespace PdfCombiner
                     if (lbFiles.Items.Contains(file)) continue;
                     lbFiles.Items.Add(file);
                     addedFileCount++;
-                    
+
                     pbFiles.Value = addedFileCount * 100 / fileNames.Length;
                     if (pbFiles.Value > pbFiles.Maximum)
                         pbFiles.Value = pbFiles.Maximum;
@@ -187,7 +199,7 @@ namespace PdfCombiner
 
                 MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
                     _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 pbFiles.Value = pbFiles.Minimum;
                 ActiveForm.Text = _resource.GetString("AppTitle");
             }
@@ -396,12 +408,10 @@ namespace PdfCombiner
             {
                 if (lbFiles.SelectedItems.Count > 0)
                 {
-                    var deleteDialog = new DialogResult();
-                    deleteDialog =
-                        MessageBox.Show(
-                            _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count +
-                            _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"),
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var deleteDialog = MessageBox.Show(
+                        _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count +
+                        _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"),
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (deleteDialog == DialogResult.Yes)
                         DeleteFilesFromListBox();
                 }
@@ -558,7 +568,9 @@ namespace PdfCombiner
                 fileList.Add(fileInfo);
             }
 
-            fileList = ascending ? fileList.OrderBy(j => j.FileName).ThenBy(j =>j.FilePath).ToList() : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j =>j.FilePath).ToList();
+            fileList = ascending
+                ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
+                : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j => j.FilePath).ToList();
 
             listBox.Items.Clear();
             foreach (var item in fileList)
