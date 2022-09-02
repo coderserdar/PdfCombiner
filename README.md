@@ -4,7 +4,7 @@
 
 This is a **Windows Form** app which is used to combine multiple **PDF** files in a single PDF file where you locate it with the app.
 
-|  Programming Language  |  .NET Version  | Development Platform |     Nuget Packages     |
+|  Programming Language  |  .NET Version  | Development Platform |     NuGet Packages     |
 |------------------------|----------------|----------------------|------------------------|
 |          *C#*          |      *4.0*     | *Visual Studio 2017* | *iTextSharp, PdfSharp* |
 
