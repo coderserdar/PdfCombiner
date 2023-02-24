@@ -119,7 +119,7 @@ namespace PdfCombiner
         #endregion
 
         #region Add Item Methods
-
+        
         /// <summary>
         /// It is used to add single or multiple PDF files to combine
         /// When you choose file or files
@@ -133,41 +133,14 @@ namespace PdfCombiner
             using (var dialogAddFile = new OpenFileDialog())
             {
                 InitializeFileDialog(dialogAddFile);
+                
                 var result = dialogAddFile.ShowDialog();
                 var addedFileCount = 0;
                 if (result != DialogResult.OK || dialogAddFile.FileNames == null) return;
-                foreach (var file in dialogAddFile.FileNames)
-                {
-                    if (lbFiles.Items.Contains(file)) continue;
-                    lbFiles.Items.Add(file);
-                    addedFileCount++;
 
-                    pbFiles.Value = addedFileCount * 100 / dialogAddFile.FileNames.Length;
-                    if (pbFiles.Value > pbFiles.Maximum)
-                        pbFiles.Value = pbFiles.Maximum;
-                    ActiveForm.Text = @"%" + pbFiles.Value;
-                }
-
-                MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
-                    _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = _resource.GetString("AppTitle");
+                AddPdfFilesToList(dialogAddFile.FileNames, ref addedFileCount);
+                GenerateAddFileMessage(addedFileCount);
             }
-        }
-
-        /// <summary>
-        /// This function is used to set options of file dialog like
-        /// Filter, start path etc.
-        /// </summary>
-        /// <param name="dialogAddFile">File Dialog</param>
-        private static void InitializeFileDialog(OpenFileDialog dialogAddFile)
-        {
-            dialogAddFile.Multiselect = true;
-            dialogAddFile.Filter = _resource.GetString("PdfFiles") + @" (*.pdf)|*.pdf";
-            dialogAddFile.InitialDirectory = Application.StartupPath;
-            dialogAddFile.Title = _resource.GetString("SelectPdfFile");
-            dialogAddFile.DefaultExt = "PDF";
         }
 
         /// <summary>
@@ -186,24 +159,57 @@ namespace PdfCombiner
                 var fileNames = Directory.GetFiles(dialogAddFolder.SelectedPath, "*.pdf",
                     SearchOption.AllDirectories);
                 var addedFileCount = 0;
-                foreach (var file in fileNames)
-                {
-                    if (lbFiles.Items.Contains(file)) continue;
-                    lbFiles.Items.Add(file);
-                    addedFileCount++;
-
-                    pbFiles.Value = addedFileCount * 100 / fileNames.Length;
-                    if (pbFiles.Value > pbFiles.Maximum)
-                        pbFiles.Value = pbFiles.Maximum;
-                    ActiveForm.Text = @"%" + pbFiles.Value;
-                }
-
-                MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
-                    _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = _resource.GetString("AppTitle");
+                
+                AddPdfFilesToList(fileNames, ref addedFileCount);
+                GenerateAddFileMessage(addedFileCount);
             }
+        }
+        
+        /// <summary>
+        /// This function is used to set options of file dialog like
+        /// Filter, start path etc.
+        /// </summary>
+        /// <param name="dialogAddFile">File Dialog</param>
+        private static void InitializeFileDialog(OpenFileDialog dialogAddFile)
+        {
+            dialogAddFile.Multiselect = true;
+            dialogAddFile.Filter = _resource.GetString("PdfFiles") + @" (*.pdf)|*.pdf";
+            dialogAddFile.InitialDirectory = Application.StartupPath;
+            dialogAddFile.Title = _resource.GetString("SelectPdfFile");
+            dialogAddFile.DefaultExt = "PDF";
+        }
+        
+        /// <summary>
+        /// This method is used both adding files or folders to list
+        /// </summary>
+        /// <param name="fileNames">List Of File Names</param>
+        /// <param name="addedFileCount">Added File Count For Progress Bar</param>
+        private void AddPdfFilesToList(string[] fileNames, ref int addedFileCount)
+        {
+            foreach (var file in fileNames)
+            {
+                if (lbFiles.Items.Contains(file)) continue;
+                lbFiles.Items.Add(file);
+                addedFileCount++;
+
+                pbFiles.Value = addedFileCount * 100 / fileNames.Length;
+                if (pbFiles.Value > pbFiles.Maximum)
+                    pbFiles.Value = pbFiles.Maximum;
+                ActiveForm.Text = @"%" + pbFiles.Value;
+            }
+        }
+        
+        /// <summary>
+        /// This method is used to show info message after adding files or folders
+        /// </summary>
+        /// <param name="addedFileCount">Added File Count</param>
+        private void GenerateAddFileMessage(int addedFileCount)
+        {
+            MessageBox.Show(addedFileCount + _resource.GetString("FileAddMessage"),
+                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            pbFiles.Value = pbFiles.Minimum;
+            ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         #endregion
@@ -231,14 +237,14 @@ namespace PdfCombiner
                     {
                         var result = dialogExport.ShowDialog();
                         if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
-                        var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
+                        
+                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount, out var combinedFiles);
+
                         using (var outputFile = new PdfDocument())
                         {
                             outputFile.Options.CompressContentStreams = true;
                             outputFile.Options.EnableCcittCompressionForBilevelImages = true;
                             outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
-                            var fileCount = lbFiles.Items.Count;
-                            var combinedFiles = 0;
 
                             foreach (var t in lbFiles.Items)
                             {
@@ -261,21 +267,14 @@ namespace PdfCombiner
                                     fileCount--;
                                 }
 
-                                pbFiles.Value = combinedFiles * 100 / fileCount;
-                                if (pbFiles.Value > pbFiles.Maximum)
-                                    pbFiles.Value = pbFiles.Maximum;
-                                ActiveForm.Text = @"%" + pbFiles.Value;
+                                SetCombinationRatio(combinedFiles, fileCount);
                             }
 
                             outputFile.Save(outputFileName);
                             outputFile.Close();
-
-                            MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName,
-                                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
-                        pbFiles.Value = pbFiles.Minimum;
-                        ActiveForm.Text = _resource.GetString("AppTitle");
+                        GenerateCombineFileMessage(fileCount, outputFileName);
                     }
                 }
             }
@@ -309,9 +308,8 @@ namespace PdfCombiner
                     {
                         var result = dialogExport.ShowDialog();
                         if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
-                        var outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
-                        var fileCount = lbFiles.Items.Count;
-                        var combinedFiles = 0;
+                        
+                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount, out var combinedFiles);
 
                         var outputFile = new Document();
                         using (var outputFileStream = new FileStream(outputFileName, FileMode.Create))
@@ -341,10 +339,7 @@ namespace PdfCombiner
                                         fileCount--;
                                     }
 
-                                    pbFiles.Value = combinedFiles * 100 / fileCount;
-                                    if (pbFiles.Value > pbFiles.Maximum)
-                                        pbFiles.Value = pbFiles.Maximum;
-                                    ActiveForm.Text = @"%" + pbFiles.Value;
+                                    SetCombinationRatio(combinedFiles, fileCount);
                                 }
 
                                 pdfWriter.Close();
@@ -353,11 +348,7 @@ namespace PdfCombiner
                             outputFile.Close();
                         }
 
-                        MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName,
-                            _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        pbFiles.Value = pbFiles.Minimum;
-                        ActiveForm.Text = _resource.GetString("AppTitle");
+                        GenerateCombineFileMessage(fileCount, outputFileName);
                     }
                 }
             }
@@ -368,6 +359,51 @@ namespace PdfCombiner
                 pbFiles.Value = pbFiles.Minimum;
                 ActiveForm.Text = _resource.GetString("AppTitle");
             }
+        }
+
+        /// <summary>
+        /// This method is used to set initial values of some properties
+        /// Which are used in combining PDF files
+        /// In both PdfSharp and ITextSharp
+        /// </summary>
+        /// <param name="dialogExport">Export Dialog Info</param>
+        /// <param name="outputFileName">Output File Name</param>
+        /// <param name="fileCount">Total File Count</param>
+        /// <param name="combinedFiles">Combined Files Count</param>
+        private void SetInitialValuesForCombiningFiles(FolderBrowserDialog dialogExport, out string outputFileName,
+            out int fileCount, out int combinedFiles)
+        {
+            outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
+            fileCount = lbFiles.Items.Count;
+            combinedFiles = 0;
+        }
+        
+        /// <summary>
+        /// This method is used to set combination degree while combining PDF files
+        /// And show this ratio on Form Caption
+        /// </summary>
+        /// <param name="combinedFiles">Combined File Count</param>
+        /// <param name="fileCount">Total File Count</param>
+        private void SetCombinationRatio(int combinedFiles, int fileCount)
+        {
+            pbFiles.Value = combinedFiles * 100 / fileCount;
+            if (pbFiles.Value > pbFiles.Maximum)
+                pbFiles.Value = pbFiles.Maximum;
+            ActiveForm.Text = @"%" + pbFiles.Value;
+        }
+        
+        /// <summary>
+        /// This method is used to set successfull combining file message
+        /// And set value of Form Caption etc.
+        /// </summary>
+        /// <param name="fileCount">Total File Count</param>
+        /// <param name="outputFileName">Output File Name</param>
+        private void GenerateCombineFileMessage(int fileCount, string outputFileName)
+        {
+            MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName,
+                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            pbFiles.Value = pbFiles.Minimum;
+            ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         #endregion
