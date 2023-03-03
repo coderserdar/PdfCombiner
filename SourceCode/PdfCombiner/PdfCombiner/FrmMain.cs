@@ -49,24 +49,37 @@ namespace PdfCombiner
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             lbFiles.ContextMenuStrip = menuStrip;
+            
+            FillLanguageComboboxAndSetFirstLanguage(out var firstLanguage);
+
+            _resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + firstLanguage,
+                Assembly.GetExecutingAssembly());
+            cmbLanguage.SelectedIndex = cmbLanguage.FindStringExact(firstLanguage.ToUpper(new CultureInfo("en-US")));
+            
+            FormMembersNameInitialization();
+        }
+
+        /// <summary>
+        /// This method is used to Fill the Language combobox
+        /// And set initial value with
+        /// The language computer used in
+        /// </summary>
+        /// <param name="firstLanguage">First Language Info</param>
+        private void FillLanguageComboboxAndSetFirstLanguage(out string firstLanguage)
+        {
             cmbLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbLanguage.Items.Clear();
             var cultureInfo = CultureInfo.InstalledUICulture;
-            var firstLanguage = string.Empty;
+            firstLanguage = string.Empty;
             foreach (var item in _languageList)
             {
                 if (cultureInfo.Name.Contains(item))
                     firstLanguage = item.ToLower(new CultureInfo("en-US"));
                 cmbLanguage.Items.Add(item);
             }
+
             if (string.IsNullOrEmpty(firstLanguage))
                 firstLanguage = "tr";
-            
-            _resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + firstLanguage,
-                Assembly.GetExecutingAssembly());
-            cmbLanguage.SelectedIndex = cmbLanguage.FindStringExact(firstLanguage.ToUpper(new CultureInfo("en-US")));
-            
-            FormMembersNameInitialization();
         }
 
         /// <summary>
@@ -85,12 +98,14 @@ namespace PdfCombiner
                     "PdfCombiner.Resources.AppResources-" +
                     cmbLanguage.SelectedItem.ToString().ToLower(new CultureInfo("en-US")),
                     Assembly.GetExecutingAssembly());
-                FormMembersNameInitialization();
             }
             catch (Exception)
             {
                 _resource = new ResourceManager("PdfCombiner.Resources.AppResources-en",
                     Assembly.GetExecutingAssembly());
+            }
+            finally
+            {
                 FormMembersNameInitialization();
             }
         }
@@ -229,8 +244,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                    MessageBox.Show(_resource.GetString("CombineWarning"), _resource.GetString("AppTitle"),
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GenerateCombineWarningMessage();
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -280,10 +294,7 @@ namespace PdfCombiner
             }
             catch (Exception ex)
             {
-                MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(),
-                    _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = _resource.GetString("AppTitle");
+                GenerateExceptionMessage(ex);
             }
         }
 
@@ -300,8 +311,7 @@ namespace PdfCombiner
             try
             {
                 if (lbFiles.Items.Count < 2)
-                    MessageBox.Show(_resource.GetString("CombineWarning"), _resource.GetString("AppTitle"),
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GenerateCombineWarningMessage();
                 else
                 {
                     using (var dialogExport = new FolderBrowserDialog())
@@ -354,11 +364,31 @@ namespace PdfCombiner
             }
             catch (Exception ex)
             {
-                MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(),
-                    _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                pbFiles.Value = pbFiles.Minimum;
-                ActiveForm.Text = _resource.GetString("AppTitle");
+                GenerateExceptionMessage(ex);
             }
+        }
+
+        /// <summary>
+        /// This method is used
+        /// When user just wnat to combine 1 pdf file
+        /// </summary>
+        private static void GenerateCombineWarningMessage()
+        {
+            MessageBox.Show(_resource.GetString("CombineWarning"), _resource.GetString("AppTitle"),
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to
+        /// Show error message when exception occurs and set form title initial value
+        /// </summary>
+        /// <param name="ex">Exception information</param>
+        private void GenerateExceptionMessage(Exception ex)
+        {
+            MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(),
+                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            pbFiles.Value = pbFiles.Minimum;
+            ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         /// <summary>
@@ -440,20 +470,38 @@ namespace PdfCombiner
             {
                 if (lbFiles.SelectedItems.Count > 0)
                 {
-                    var deleteDialog = MessageBox.Show(
-                        _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count +
-                        _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"),
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    ShowDeleteDialog(out var deleteDialog);
                     if (deleteDialog == DialogResult.Yes)
                         DeleteFilesFromListBox();
                 }
                 else
-                    MessageBox.Show(_resource.GetString("NoSelectedFile"), _resource.GetString("AppTitle"),
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GenerateNoSelectedFileInListBoxMessage();
             }
             else
-                MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                GenerateNoFileInListBoxMessage();
+        }
+
+        /// <summary>
+        /// This method is used in
+        /// When there is no selected file in listbox
+        /// </summary>
+        private static void GenerateNoSelectedFileInListBoxMessage()
+        {
+            MessageBox.Show(_resource.GetString("NoSelectedFile"), _resource.GetString("AppTitle"),
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// This method is used to
+        /// Show delete file dialog
+        /// </summary>
+        /// <param name="deleteDialog">Delete File Dialog</param>
+        private void ShowDeleteDialog(out DialogResult deleteDialog)
+        {
+            deleteDialog = MessageBox.Show(
+                _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count +
+                _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"),
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         /// <summary>
@@ -483,8 +531,7 @@ namespace PdfCombiner
                 lbFiles.Items.Add(item);
             }
 
-            MessageBox.Show(fileCount + _resource.GetString("DeleteFileMessage"), _resource.GetString("AppTitle"),
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            GenerateDeleteItemMessage(fileCount);
         }
 
         /// <summary>
@@ -496,6 +543,15 @@ namespace PdfCombiner
         {
             var fileCount = lbFiles.Items.Count;
             lbFiles.Items.Clear();
+            GenerateDeleteItemMessage(fileCount);
+        }
+        
+        /// <summary>
+        /// This method is used after deleting items from listbox
+        /// </summary>
+        /// <param name="fileCount">Deleted File Count Information</param>
+        private static void GenerateDeleteItemMessage(int fileCount)
+        {
             MessageBox.Show(fileCount + _resource.GetString("DeleteFileMessage"), _resource.GetString("AppTitle"),
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -514,8 +570,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByPath(lbFiles, true);
             else
-                MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                GenerateNoFileInListBoxMessage();
         }
 
         /// <summary>
@@ -528,8 +583,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByPath(lbFiles, false);
             else
-                MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                GenerateNoFileInListBoxMessage();
         }
 
         /// <summary>
@@ -542,8 +596,7 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByName(lbFiles, true);
             else
-                MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                GenerateNoFileInListBoxMessage();
         }
 
         /// <summary>
@@ -556,8 +609,17 @@ namespace PdfCombiner
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItemsByName(lbFiles, false);
             else
-                MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                GenerateNoFileInListBoxMessage();
+        }
+        
+        /// <summary>
+        /// This method is used to generate message
+        /// When there is no item in listbox
+        /// </summary>
+        private static void GenerateNoFileInListBoxMessage()
+        {
+            MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
 
         /// <summary>
