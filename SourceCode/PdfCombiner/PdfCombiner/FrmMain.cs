@@ -21,7 +21,7 @@ namespace PdfCombiner
         private static ResourceManager _resource;
 
         // Culture lists whose resources have been added to project
-        private static readonly List<string> _languageList = new List<string>
+        private static readonly List<string> LanguageList = new List<string>
             {"EN", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR", "NL", "PT", "IN", "ID", "JP", "BG"};
 
         public FrmMain()
@@ -74,7 +74,7 @@ namespace PdfCombiner
             cmbLanguage.Items.Clear();
             var cultureInfo = CultureInfo.InstalledUICulture;
             firstLanguage = string.Empty;
-            foreach (var item in _languageList)
+            foreach (var item in LanguageList)
             {
                 if (cultureInfo.Name.Contains(item))
                     firstLanguage = item.ToLower(new CultureInfo("en-US"));
@@ -131,7 +131,7 @@ namespace PdfCombiner
         private void FormMembersNameInitialization()
         {
             if (_resource == null) return;
-            ActiveForm.Text = _resource.GetString("AppTitle") ?? string.Empty;
+            if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle") ?? string.Empty;
             btnAddFile.Text = _resource.GetString("AddFile") ?? string.Empty;
             btnAddFolder.Text = _resource.GetString("AddFolder") ?? string.Empty;
             btnClearList.Text = _resource.GetString("ClearFileList") ?? string.Empty;
@@ -213,7 +213,7 @@ namespace PdfCombiner
         /// </summary>
         /// <param name="fileNames">List Of File Names</param>
         /// <param name="addedFileCount">Added File Count For Progress Bar</param>
-        private void AddPdfFilesToList(string[] fileNames, ref int addedFileCount)
+        private void AddPdfFilesToList(ICollection<string> fileNames, ref int addedFileCount)
         {
             foreach (var file in fileNames)
             {
@@ -221,10 +221,10 @@ namespace PdfCombiner
                 lbFiles.Items.Add(file);
                 addedFileCount++;
 
-                pbFiles.Value = addedFileCount * 100 / fileNames.Length;
+                pbFiles.Value = addedFileCount * 100 / fileNames.Count;
                 if (pbFiles.Value > pbFiles.Maximum)
                     pbFiles.Value = pbFiles.Maximum;
-                ActiveForm.Text = @"%" + pbFiles.Value;
+                if (ActiveForm != null) ActiveForm.Text = @"%" + pbFiles.Value;
             }
         }
 
@@ -238,7 +238,7 @@ namespace PdfCombiner
                 _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             pbFiles.Value = pbFiles.Minimum;
-            ActiveForm.Text = _resource.GetString("AppTitle");
+            if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         #endregion
@@ -327,7 +327,7 @@ namespace PdfCombiner
                         var outputFile = new Document();
                         using (var outputFileStream = new FileStream(outputFileName, FileMode.Create))
                         {
-                            using (var pdfWriter = new iTextSharp.text.pdf.PdfCopy(outputFile, outputFileStream))
+                            using (var pdfWriter = new PdfCopy(outputFile, outputFileStream))
                             {
                                 pdfWriter.SetFullCompression();
                                 outputFile.Open();
@@ -449,7 +449,7 @@ namespace PdfCombiner
             MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(),
                 _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             pbFiles.Value = pbFiles.Minimum;
-            ActiveForm.Text = _resource.GetString("AppTitle");
+            if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace PdfCombiner
             pbFiles.Value = combinedFiles * 100 / fileCount;
             if (pbFiles.Value > pbFiles.Maximum)
                 pbFiles.Value = pbFiles.Maximum;
-            ActiveForm.Text = @"%" + pbFiles.Value;
+            if (ActiveForm != null) ActiveForm.Text = @"%" + pbFiles.Value;
         }
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace PdfCombiner
             MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName,
                 _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             pbFiles.Value = pbFiles.Minimum;
-            ActiveForm.Text = _resource.GetString("AppTitle");
+            if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
 
         #endregion
@@ -572,19 +572,10 @@ namespace PdfCombiner
         /// </summary>
         private void DeleteFilesFromListBox()
         {
-            var allItems = new List<string>();
-            var removedItems = new List<string>();
             var fileCount = lbFiles.SelectedItems.Count;
-            foreach (var t in lbFiles.SelectedItems)
-            {
-                removedItems.Add(t.ToString());
-            }
+            var removedItems = (from object t in lbFiles.SelectedItems select t.ToString()).ToList();
 
-            foreach (var item in lbFiles.Items)
-            {
-                if (removedItems.All(j => j != item.ToString()))
-                    allItems.Add(item.ToString());
-            }
+            var allItems = (from object item in lbFiles.Items where removedItems.All(j => j != item.ToString()) select item.ToString()).ToList();
 
             lbFiles.Items.Clear();
             foreach (var item in allItems)
@@ -707,21 +698,9 @@ namespace PdfCombiner
         /// <param name="ascending">Order Type is Ascending Or Not</param>
         private static ListBox SortItemsByName(ListBox listBox, bool ascending)
         {
-            var fileList = new List<FileInfo>();
             var items = listBox.Items.OfType<object>().ToList();
             const char c = '\u005c';
-            foreach (var item in items)
-            {
-                var fullPath = item.ToString();
-                var list = fullPath.Split(c).ToList();
-                if (list.Count <= 0) continue;
-                var fileInfo = new FileInfo
-                {
-                    FilePath = fullPath,
-                    FileName = list[list.Count - 1]
-                };
-                fileList.Add(fileInfo);
-            }
+            var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo {FilePath = fullPath, FileName = list[list.Count - 1]}).ToList();
 
             fileList = ascending
                 ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
