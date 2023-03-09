@@ -10,6 +10,9 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
+using iTextSharp.text.pdf;
+using PdfDocument = PdfSharp.Pdf.PdfDocument;
+using PdfReader = PdfSharp.Pdf.IO.PdfReader;
 
 namespace PdfCombiner
 {
@@ -49,13 +52,13 @@ namespace PdfCombiner
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             lbFiles.ContextMenuStrip = menuStrip;
-            
+
             FillLanguageComboboxAndSetFirstLanguage(out var firstLanguage);
 
             _resource = new ResourceManager("PdfCombiner.Resources.AppResources-" + firstLanguage,
                 Assembly.GetExecutingAssembly());
             cmbLanguage.SelectedIndex = cmbLanguage.FindStringExact(firstLanguage.ToUpper(new CultureInfo("en-US")));
-            
+
             FormMembersNameInitialization();
         }
 
@@ -92,6 +95,17 @@ namespace PdfCombiner
         private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbLanguage.SelectedIndex == -1) return;
+            SetProgramLanguage();
+        }
+
+        /// <summary>
+        /// This method is used to Set Program Language
+        /// By the selection from Language Combobox
+        /// Finally, with the selected language
+        /// Form elements renamed with the selected language
+        /// </summary>
+        private void SetProgramLanguage()
+        {
             try
             {
                 _resource = new ResourceManager(
@@ -134,7 +148,7 @@ namespace PdfCombiner
         #endregion
 
         #region Add Item Methods
-        
+
         /// <summary>
         /// It is used to add single or multiple PDF files to combine
         /// When you choose file or files
@@ -148,7 +162,7 @@ namespace PdfCombiner
             using (var dialogAddFile = new OpenFileDialog())
             {
                 InitializeFileDialog(dialogAddFile);
-                
+
                 var result = dialogAddFile.ShowDialog();
                 var addedFileCount = 0;
                 if (result != DialogResult.OK || dialogAddFile.FileNames == null) return;
@@ -174,12 +188,12 @@ namespace PdfCombiner
                 var fileNames = Directory.GetFiles(dialogAddFolder.SelectedPath, "*.pdf",
                     SearchOption.AllDirectories);
                 var addedFileCount = 0;
-                
+
                 AddPdfFilesToList(fileNames, ref addedFileCount);
                 GenerateAddFileMessage(addedFileCount);
             }
         }
-        
+
         /// <summary>
         /// This function is used to set options of file dialog like
         /// Filter, start path etc.
@@ -193,7 +207,7 @@ namespace PdfCombiner
             dialogAddFile.Title = _resource.GetString("SelectPdfFile");
             dialogAddFile.DefaultExt = "PDF";
         }
-        
+
         /// <summary>
         /// This method is used both adding files or folders to list
         /// </summary>
@@ -213,7 +227,7 @@ namespace PdfCombiner
                 ActiveForm.Text = @"%" + pbFiles.Value;
             }
         }
-        
+
         /// <summary>
         /// This method is used to show info message after adding files or folders
         /// </summary>
@@ -251,30 +265,19 @@ namespace PdfCombiner
                     {
                         var result = dialogExport.ShowDialog();
                         if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
-                        
-                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount, out var combinedFiles);
+
+                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount,
+                            out var combinedFiles);
 
                         using (var outputFile = new PdfDocument())
                         {
-                            outputFile.Options.CompressContentStreams = true;
-                            outputFile.Options.EnableCcittCompressionForBilevelImages = true;
-                            outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
+                            SetOutputFilePropertiesPdfSharp(outputFile);
 
                             foreach (var t in lbFiles.Items)
                             {
                                 try
                                 {
-                                    var inputDocument = PdfReader.Open(t.ToString(),
-                                        PdfDocumentOpenMode.Import);
-                                    var count = inputDocument.PageCount;
-                                    for (var idx = 0; idx < count; idx++)
-                                    {
-                                        var page = inputDocument.Pages[idx];
-                                        outputFile.AddPage(page);
-                                    }
-
-                                    inputDocument.Close();
-                                    combinedFiles++;
+                                    AddPdfContentToTargetPdfFilePdfSharp(t, outputFile, ref combinedFiles);
                                 }
                                 catch (Exception)
                                 {
@@ -284,8 +287,7 @@ namespace PdfCombiner
                                 SetCombinationRatio(combinedFiles, fileCount);
                             }
 
-                            outputFile.Save(outputFileName);
-                            outputFile.Close();
+                            SaveOutputPdfFile(outputFile, outputFileName);
                         }
 
                         GenerateCombineFileMessage(fileCount, outputFileName);
@@ -318,8 +320,9 @@ namespace PdfCombiner
                     {
                         var result = dialogExport.ShowDialog();
                         if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
-                        
-                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount, out var combinedFiles);
+
+                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount,
+                            out var combinedFiles);
 
                         var outputFile = new Document();
                         using (var outputFileStream = new FileStream(outputFileName, FileMode.Create))
@@ -332,17 +335,7 @@ namespace PdfCombiner
                                 {
                                     try
                                     {
-                                        var pdfReader =
-                                            new iTextSharp.text.pdf.PdfReader(t.ToString());
-                                        pdfReader.ConsolidateNamedDestinations();
-                                        for (var j = 1; j <= pdfReader.NumberOfPages; j++)
-                                        {
-                                            var page = pdfWriter.GetImportedPage(pdfReader, j);
-                                            pdfWriter.AddPage(page);
-                                        }
-
-                                        pdfReader.Close();
-                                        combinedFiles++;
+                                        AddPdfContentToTargetPdfFileITextSharp(t, pdfWriter, ref combinedFiles);
                                     }
                                     catch (Exception)
                                     {
@@ -366,6 +359,74 @@ namespace PdfCombiner
             {
                 GenerateExceptionMessage(ex);
             }
+        }
+        
+        /// <summary>
+        /// This method is used to
+        /// Save Combined PDF File
+        /// </summary>
+        /// <param name="outputFile">Combined PDF File</param>
+        /// <param name="outputFileName">Combined PDF File Path</param>
+        private static void SaveOutputPdfFile(PdfDocument outputFile, string outputFileName)
+        {
+            outputFile.Save(outputFileName);
+            outputFile.Close();
+        }
+
+        /// <summary>
+        /// This method is used to take source pdf file content
+        /// And add to the target combined pdf file
+        /// </summary>
+        /// <param name="t">Source PDF File Path</param>
+        /// <param name="outputFile">Combined PDF File</param>
+        /// <param name="combinedFiles">Combined File Count</param>
+        private static void AddPdfContentToTargetPdfFilePdfSharp(object t, PdfDocument outputFile, ref int combinedFiles)
+        {
+            var inputDocument = PdfReader.Open(t.ToString(),
+                PdfDocumentOpenMode.Import);
+            var count = inputDocument.PageCount;
+            for (var idx = 0; idx < count; idx++)
+            {
+                var page = inputDocument.Pages[idx];
+                outputFile.AddPage(page);
+            }
+
+            inputDocument.Close();
+            combinedFiles++;
+        }
+
+        /// <summary>
+        /// This method is used to set combined PDF file
+        /// Properties like Compression etc.
+        /// </summary>
+        /// <param name="outputFile">Combined PDF File</param>
+        private static void SetOutputFilePropertiesPdfSharp(PdfDocument outputFile)
+        {
+            outputFile.Options.CompressContentStreams = true;
+            outputFile.Options.EnableCcittCompressionForBilevelImages = true;
+            outputFile.Options.FlateEncodeMode = PdfFlateEncodeMode.BestCompression;
+        }
+
+        /// <summary>
+        /// This method is used to take source pdf file content
+        /// And add to the target combined pdf file
+        /// </summary>
+        /// <param name="t">Source PDF File Path</param>
+        /// <param name="pdfWriter">PDF Writer</param>
+        /// <param name="combinedFiles">Combined File Count</param>
+        private static void AddPdfContentToTargetPdfFileITextSharp(object t, PdfCopy pdfWriter, ref int combinedFiles)
+        {
+            var pdfReader =
+                new iTextSharp.text.pdf.PdfReader(t.ToString());
+            pdfReader.ConsolidateNamedDestinations();
+            for (var j = 1; j <= pdfReader.NumberOfPages; j++)
+            {
+                var page = pdfWriter.GetImportedPage(pdfReader, j);
+                pdfWriter.AddPage(page);
+            }
+
+            pdfReader.Close();
+            combinedFiles++;
         }
 
         /// <summary>
@@ -407,7 +468,7 @@ namespace PdfCombiner
             fileCount = lbFiles.Items.Count;
             combinedFiles = 0;
         }
-        
+
         /// <summary>
         /// This method is used to set combination degree while combining PDF files
         /// And show this ratio on Form Caption
@@ -421,7 +482,7 @@ namespace PdfCombiner
                 pbFiles.Value = pbFiles.Maximum;
             ActiveForm.Text = @"%" + pbFiles.Value;
         }
-        
+
         /// <summary>
         /// This method is used to set successfull combining file message
         /// And set value of Form Caption etc.
@@ -545,7 +606,7 @@ namespace PdfCombiner
             lbFiles.Items.Clear();
             GenerateDeleteItemMessage(fileCount);
         }
-        
+
         /// <summary>
         /// This method is used after deleting items from listbox
         /// </summary>
@@ -611,7 +672,7 @@ namespace PdfCombiner
             else
                 GenerateNoFileInListBoxMessage();
         }
-        
+
         /// <summary>
         /// This method is used to generate message
         /// When there is no item in listbox
