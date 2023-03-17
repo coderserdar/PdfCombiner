@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using iTextSharp.text.pdf;
 using PdfDocument = PdfSharp.Pdf.PdfDocument;
 using PdfReader = PdfSharp.Pdf.IO.PdfReader;
+using static PdfCombiner.Enums;
 
 namespace PdfCombiner
 {
@@ -620,7 +621,7 @@ namespace PdfCombiner
         private void menuItemOrderByPathAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByPath(lbFiles, true);
+                lbFiles = SortItemsByPath(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -633,7 +634,7 @@ namespace PdfCombiner
         private void menuItemOrderByPathDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByPath(lbFiles, false);
+                lbFiles = SortItemsByPath(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -646,7 +647,7 @@ namespace PdfCombiner
         private void menuItemOrderByNameAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByName(lbFiles, true);
+                lbFiles = SortItemsByName(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -659,7 +660,7 @@ namespace PdfCombiner
         private void menuItemOrderByNameDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByName(lbFiles, false);
+                lbFiles = SortItemsByName(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -679,12 +680,12 @@ namespace PdfCombiner
         /// And return them with the given order as parametre
         /// </summary>
         /// <param name="listBox">ListBox Info</param>
-        /// <param name="ascending">Order Type is Ascending Or Not</param>
-        private static ListBox SortItemsByPath(ListBox listBox, bool ascending)
+        /// <param name="orderType">Order Type is Ascending Or Not</param>
+        private static ListBox SortItemsByPath(ListBox listBox, OrderType orderType)
         {
             var items = listBox.Items.OfType<object>().ToList();
             listBox.Items.Clear();
-            listBox.Items.AddRange(ascending
+            listBox.Items.AddRange(orderType == OrderType.Ascending
                 ? items.OrderBy(i => i).ToArray()
                 : items.OrderByDescending(i => i).ToArray());
             return listBox;
@@ -695,14 +696,14 @@ namespace PdfCombiner
         /// And return them with the given order as parametre
         /// </summary>
         /// <param name="listBox">ListBox Info</param>
-        /// <param name="ascending">Order Type is Ascending Or Not</param>
-        private static ListBox SortItemsByName(ListBox listBox, bool ascending)
+        /// <param name="orderType">Order Type is Ascending Or Not</param>
+        private static ListBox SortItemsByName(ListBox listBox, OrderType orderType)
         {
             var items = listBox.Items.OfType<object>().ToList();
             const char c = '\u005c';
             var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo {FilePath = fullPath, FileName = list[list.Count - 1]}).ToList();
 
-            fileList = ascending
+            fileList = orderType == OrderType.Ascending
                 ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
                 : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j => j.FilePath).ToList();
 
