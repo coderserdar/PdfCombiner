@@ -8,6 +8,11 @@ namespace PdfCombiner
     /// </summary>
     public static class Enums
     {
+        /// <summary>
+        /// This enum is used for
+        /// Assigning the order type in listbox items
+        /// Ascending or Descending
+        /// </summary>
         [Flags]
         public enum OrderType
         {

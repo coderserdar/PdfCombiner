@@ -39,8 +39,7 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MessageBox.Show(_resource.GetString("ThanksMessage"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show(_resource.GetString("ThanksMessage"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
         }
 
@@ -386,9 +385,9 @@ namespace PdfCombiner
             var inputDocument = PdfReader.Open(t.ToString(),
                 PdfDocumentOpenMode.Import);
             var count = inputDocument.PageCount;
-            for (var idx = 0; idx < count; idx++)
+            for (var index = 0; index < count; index++)
             {
-                var page = inputDocument.Pages[idx];
+                var page = inputDocument.Pages[index];
                 outputFile.AddPage(page);
             }
 
@@ -436,8 +435,7 @@ namespace PdfCombiner
         /// </summary>
         private static void GenerateCombineWarningMessage()
         {
-            MessageBox.Show(_resource.GetString("CombineWarning"), _resource.GetString("AppTitle"),
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(_resource.GetString("CombineWarning"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -447,8 +445,7 @@ namespace PdfCombiner
         /// <param name="ex">Exception information</param>
         private void GenerateExceptionMessage(Exception ex)
         {
-            MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(),
-                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             pbFiles.Value = pbFiles.Minimum;
             if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
@@ -492,8 +489,7 @@ namespace PdfCombiner
         /// <param name="outputFileName">Output File Name</param>
         private void GenerateCombineFileMessage(int fileCount, string outputFileName)
         {
-            MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName,
-                _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName, _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             pbFiles.Value = pbFiles.Minimum;
             if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
@@ -560,10 +556,7 @@ namespace PdfCombiner
         /// <param name="deleteDialog">Delete File Dialog</param>
         private void ShowDeleteDialog(out DialogResult deleteDialog)
         {
-            deleteDialog = MessageBox.Show(
-                _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count +
-                _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"),
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            deleteDialog = MessageBox.Show( _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count + _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         /// <summary>
@@ -605,8 +598,7 @@ namespace PdfCombiner
         /// <param name="fileCount">Deleted File Count Information</param>
         private static void GenerateDeleteItemMessage(int fileCount)
         {
-            MessageBox.Show(fileCount + _resource.GetString("DeleteFileMessage"), _resource.GetString("AppTitle"),
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(fileCount + _resource.GetString("DeleteFileMessage"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
@@ -671,8 +663,7 @@ namespace PdfCombiner
         /// </summary>
         private static void GenerateNoFileInListBoxMessage()
         {
-            MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+            MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>

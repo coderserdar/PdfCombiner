@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseException.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="FileInfo.cs" />

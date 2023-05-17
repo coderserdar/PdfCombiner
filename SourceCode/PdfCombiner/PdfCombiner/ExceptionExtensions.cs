@@ -3,6 +3,10 @@ using System.Text;
 
 namespace PdfCombiner
 {
+    /// <summary>
+    /// This class is used to take generic exception messages
+    /// With the inner exception, stack trace and source informations
+    /// </summary>
     public static class ExceptionExtensions
     {
         /// <summary>
@@ -13,13 +17,13 @@ namespace PdfCombiner
         public static string GetAllMessages(this Exception exception)
         {
             var sb = new StringBuilder();
-            sb.Append(exception.Message);
+            sb.AppendLine(exception.Message);
             if (exception.InnerException != null)
-                sb.Append($" {exception.InnerException.GetAllMessages()}");
+                sb.AppendLine($" {exception.InnerException.GetAllMessages()}");
             if (!string.IsNullOrEmpty(exception.StackTrace))
-                sb.Append($" {exception.StackTrace}");
+                sb.AppendLine($" {exception.StackTrace}");
             if (!string.IsNullOrEmpty(exception.Source))
-                sb.Append($" {exception.Source}");
+                sb.AppendLine($" {exception.Source}");
             return sb.ToString();
         }
     }
