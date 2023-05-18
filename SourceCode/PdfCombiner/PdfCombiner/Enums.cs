@@ -19,5 +19,17 @@ namespace PdfCombiner
             Ascending,
             Descending
         }
+        
+        /// <summary>
+        /// This enum is used for
+        /// Assigning the sort type in listbox items
+        /// By Name or By Path
+        /// </summary>
+        [Flags]
+        public enum SortType
+        {
+            ByName,
+            ByPath
+        }
     }
 }

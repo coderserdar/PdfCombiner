@@ -613,7 +613,8 @@ namespace PdfCombiner
         private void menuItemOrderByPathAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByPath(lbFiles, OrderType.Ascending);
+                lbFiles = SortItems(lbFiles, SortType.ByPath, OrderType.Ascending);
+                // lbFiles = SortItemsByPath(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -626,7 +627,8 @@ namespace PdfCombiner
         private void menuItemOrderByPathDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByPath(lbFiles, OrderType.Descending);
+                lbFiles = SortItems(lbFiles, SortType.ByPath, OrderType.Descending);
+                // lbFiles = SortItemsByPath(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -639,7 +641,8 @@ namespace PdfCombiner
         private void menuItemOrderByNameAscending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByName(lbFiles, OrderType.Ascending);
+                lbFiles = SortItems(lbFiles, SortType.ByName, OrderType.Ascending);
+                // lbFiles = SortItemsByName(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -652,7 +655,8 @@ namespace PdfCombiner
         private void menuItemOrderByNameDescending_Click(object sender, EventArgs e)
         {
             if (lbFiles.Items.Count > 0)
-                lbFiles = SortItemsByName(lbFiles, OrderType.Descending);
+                lbFiles = SortItems(lbFiles, SortType.ByName, OrderType.Descending);
+                // lbFiles = SortItemsByName(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -664,6 +668,42 @@ namespace PdfCombiner
         private static void GenerateNoFileInListBoxMessage()
         {
             MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        
+        /// <summary>
+        /// This method is used to order items by full path in listbox
+        /// And return them with the given order as parametre
+        /// </summary>
+        /// <param name="listBox">ListBox Info</param>
+        /// <param name="sortType">Sort Type (By Name or Path)</param>
+        /// <param name="orderType">Order Type is Ascending Or Not</param>
+        private static ListBox SortItems(ListBox listBox, SortType sortType, OrderType orderType)
+        {
+            var items = listBox.Items.OfType<object>().ToList();
+            listBox.Items.Clear();
+
+            // Sort Items By Name
+            if (sortType == SortType.ByName)
+            {
+                listBox.Items.AddRange(orderType == OrderType.Ascending
+                    ? items.OrderBy(i => i).ToArray()
+                    : items.OrderByDescending(i => i).ToArray());
+            }
+            // Sort Items By Path
+            else
+            {
+                const char c = '\u005c';
+                var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo {FilePath = fullPath, FileName = list[list.Count - 1]}).ToList();
+
+                fileList = orderType == OrderType.Ascending
+                    ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
+                    : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j => j.FilePath).ToList();
+                
+                foreach (var item in fileList)
+                    listBox.Items.Add(item.FilePath);
+            }
+            
+            return listBox;
         }
 
         /// <summary>
