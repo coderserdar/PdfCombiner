@@ -41,7 +41,8 @@ You can look up the source code's documentation in [Documentation](https://githu
 And you can look up screenshots like 
 
 **v4**
-Consider the following revised version v4:
+
+Consider these changes within version 4:
 
  - Upgraded to the .NET 4.8 framework to facilitate the addition of new features and support future development and enhancements.
  - Now compatible with Visual Studio 2022.
