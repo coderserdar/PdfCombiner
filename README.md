@@ -44,8 +44,8 @@ And you can look up screenshots like
 
 <table>
    <tr>
-      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v3/App_Screens_01.png?raw=true"></td>
-      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v3/App_Screens_02.png?raw=true"></td>
+      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v4/App_Screens_01.png?raw=true"></td>
+      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v4/App_Screens_02.png?raw=true"></td>
    </tr>
 </table>
 
