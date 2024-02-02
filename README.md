@@ -8,7 +8,7 @@ This is a **Windows Form** app which is used to combine multiple **PDF** files i
 |------------------------|----------------|----------------------|------------------------|
 |          *C#*          |      *4.0*     | *Visual Studio 2017* | *iTextSharp, PdfSharp* |
 
-<img src="https://github.com/coderserdar/PdfCombiner/blob/main/Screenshots/Main/MainScreen.png?raw=true">
+<img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/Main/MainScreen.png?raw=true">
 
 I use both [iTextSharp](https://www.nuget.org/packages/iTextSharp/) and [PdfSharp](http://www.pdfsharp.net) *NuGet* packages. You can prefer both options to combine your PDF files. 
 I tested this app a lot, but if you test and send me issues I will be so appreciated to you. 
