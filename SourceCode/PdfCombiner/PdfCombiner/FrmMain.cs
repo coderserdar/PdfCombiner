@@ -23,7 +23,7 @@ namespace PdfCombiner
 
         // Culture lists whose resources have been added to project
         private static readonly List<string> LanguageList = new List<string>
-            {"EN", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR", "NL", "PT", "IN", "ID", "JP", "BG"};
+            {"EN", "IN", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR", "NL", "PT", "ID", "JP", "BG"};
 
         public FrmMain()
         {
@@ -82,7 +82,7 @@ namespace PdfCombiner
             }
 
             if (string.IsNullOrEmpty(firstLanguage))
-                firstLanguage = "tr";
+                firstLanguage = "en";
         }
 
         /// <summary>
