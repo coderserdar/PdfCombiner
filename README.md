@@ -46,6 +46,7 @@ And you can look up screenshots like
 Changes within version 5:
 
  - Implemented feature to drag and drop pdf files to the list box.
+ - Implemented Save As dialog to save the combined files to desired location & name 
  
 <table>
    <tr>

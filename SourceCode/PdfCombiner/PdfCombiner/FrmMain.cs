@@ -14,6 +14,7 @@ using iTextSharp.text.pdf;
 using PdfDocument = PdfSharp.Pdf.PdfDocument;
 using PdfReader = PdfSharp.Pdf.IO.PdfReader;
 using static PdfCombiner.Enums;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PdfCombiner
 {
@@ -264,13 +265,25 @@ namespace PdfCombiner
                     GenerateCombineWarningMessage();
                 else
                 {
-                    using (var dialogExport = new FolderBrowserDialog())
+                    //using (var dialogExport = new FolderBrowserDialog())
+                    using (var saveFileDialog = new SaveFileDialog())
                     {
-                        var result = dialogExport.ShowDialog();
-                        if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
+                        saveFileDialog.InitialDirectory = @"C:\";
+                        saveFileDialog.Title = "Save Combined Files";
+                        saveFileDialog.CheckPathExists = true;
+                        saveFileDialog.CheckFileExists = false;
+                        saveFileDialog.DefaultExt = "pdf";
+                        saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+                        saveFileDialog.RestoreDirectory = true;
+                        var result = saveFileDialog.ShowDialog();
+                        if (result != DialogResult.OK || string.IsNullOrEmpty(saveFileDialog.FileName)) return;
 
-                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount,
-                            out var combinedFiles);
+                        SetInitialValuesForCombiningFiles(saveFileDialog, out var outputFileName, out var fileCount, out var combinedFiles);
+
+                        //var result = dialogExport.ShowDialog();
+                        //if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
+
+                        //SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount, out var combinedFiles);
 
                         using (var outputFile = new PdfDocument())
                         {
@@ -319,13 +332,19 @@ namespace PdfCombiner
                     GenerateCombineWarningMessage();
                 else
                 {
-                    using (var dialogExport = new FolderBrowserDialog())
+                    using (var saveFileDialog = new SaveFileDialog())
                     {
-                        var result = dialogExport.ShowDialog();
-                        if (result != DialogResult.OK || string.IsNullOrEmpty(dialogExport.SelectedPath)) return;
+                        saveFileDialog.InitialDirectory = @"C:\";
+                        saveFileDialog.Title = "Save Combined Files";
+                        saveFileDialog.CheckPathExists = true;
+                        saveFileDialog.CheckFileExists = false;
+                        saveFileDialog.DefaultExt = "pdf";
+                        saveFileDialog.Filter = "PDF document (*.pdf)|*.pdf";
+                        saveFileDialog.RestoreDirectory = true;
+                        var result = saveFileDialog.ShowDialog();
+                        if (result != DialogResult.OK || string.IsNullOrEmpty(saveFileDialog.FileName)) return;
 
-                        SetInitialValuesForCombiningFiles(dialogExport, out var outputFileName, out var fileCount,
-                            out var combinedFiles);
+                        SetInitialValuesForCombiningFiles(saveFileDialog, out var outputFileName, out var fileCount, out var combinedFiles);
 
                         var outputFile = new Document();
                         using (var outputFileStream = new FileStream(outputFileName, FileMode.Create))
@@ -466,6 +485,21 @@ namespace PdfCombiner
             out int fileCount, out int combinedFiles)
         {
             outputFileName = dialogExport.SelectedPath + "/" + Guid.NewGuid() + ".pdf";
+            fileCount = lbFiles.Items.Count;
+            combinedFiles = 0;
+        }
+
+        /// <summary>
+        /// This method is used to set initial values of some properties
+        /// Which are used in combining PDF files In both PdfSharp and ITextSharp
+        /// </summary>
+        /// <param name="dialogExport">Export Dialog Info</param>
+        /// <param name="outputFileName">Output File Name</param>
+        /// <param name="fileCount">Total File Count</param>
+        /// <param name="combinedFiles">Combined Files Count</param>
+        private void SetInitialValuesForCombiningFiles(SaveFileDialog dialogExport, out string outputFileName, out int fileCount, out int combinedFiles)
+        {
+            outputFileName = dialogExport.FileName;
             fileCount = lbFiles.Items.Count;
             combinedFiles = 0;
         }
