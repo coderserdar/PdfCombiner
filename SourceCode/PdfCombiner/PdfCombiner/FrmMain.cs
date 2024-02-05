@@ -52,6 +52,8 @@ namespace PdfCombiner
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             lbFiles.ContextMenuStrip = menuStrip;
+            // To allow dropping an item to the listbox
+            lbFiles.AllowDrop = true;
 
             FillLanguageComboboxAndSetFirstLanguage(out var firstLanguage);
 
@@ -60,6 +62,7 @@ namespace PdfCombiner
             cmbLanguage.SelectedIndex = cmbLanguage.FindStringExact(firstLanguage.ToUpper(new CultureInfo("en-US")));
 
             FormMembersNameInitialization();
+
         }
 
         /// <summary>
@@ -360,7 +363,7 @@ namespace PdfCombiner
                 GenerateExceptionMessage(ex);
             }
         }
-        
+
         /// <summary>
         /// This method is used to
         /// Save Combined PDF File
@@ -556,7 +559,7 @@ namespace PdfCombiner
         /// <param name="deleteDialog">Delete File Dialog</param>
         private void ShowDeleteDialog(out DialogResult deleteDialog)
         {
-            deleteDialog = MessageBox.Show( _resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count + _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            deleteDialog = MessageBox.Show(_resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count + _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         /// <summary>
@@ -614,7 +617,7 @@ namespace PdfCombiner
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, SortType.ByPath, OrderType.Ascending);
-                // lbFiles = SortItemsByPath(lbFiles, OrderType.Ascending);
+            // lbFiles = SortItemsByPath(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -628,7 +631,7 @@ namespace PdfCombiner
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, SortType.ByPath, OrderType.Descending);
-                // lbFiles = SortItemsByPath(lbFiles, OrderType.Descending);
+            // lbFiles = SortItemsByPath(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -642,7 +645,7 @@ namespace PdfCombiner
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, SortType.ByName, OrderType.Ascending);
-                // lbFiles = SortItemsByName(lbFiles, OrderType.Ascending);
+            // lbFiles = SortItemsByName(lbFiles, OrderType.Ascending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -656,7 +659,7 @@ namespace PdfCombiner
         {
             if (lbFiles.Items.Count > 0)
                 lbFiles = SortItems(lbFiles, SortType.ByName, OrderType.Descending);
-                // lbFiles = SortItemsByName(lbFiles, OrderType.Descending);
+            // lbFiles = SortItemsByName(lbFiles, OrderType.Descending);
             else
                 GenerateNoFileInListBoxMessage();
         }
@@ -669,7 +672,7 @@ namespace PdfCombiner
         {
             MessageBox.Show(_resource.GetString("NoFile"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
         /// <summary>
         /// This method is used to order items by full path in listbox
         /// And return them with the given order as parametre
@@ -693,16 +696,16 @@ namespace PdfCombiner
             else
             {
                 const char c = '\u005c';
-                var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo {FilePath = fullPath, FileName = list[list.Count - 1]}).ToList();
+                var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo { FilePath = fullPath, FileName = list[list.Count - 1] }).ToList();
 
                 fileList = orderType == OrderType.Ascending
                     ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
                     : fileList.OrderByDescending(j => j.FileName).ThenByDescending(j => j.FilePath).ToList();
-                
+
                 foreach (var item in fileList)
                     listBox.Items.Add(item.FilePath);
             }
-            
+
             return listBox;
         }
 
@@ -732,7 +735,7 @@ namespace PdfCombiner
         {
             var items = listBox.Items.OfType<object>().ToList();
             const char c = '\u005c';
-            var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo {FilePath = fullPath, FileName = list[list.Count - 1]}).ToList();
+            var fileList = (from item in items select item.ToString() into fullPath let list = fullPath.Split(c).ToList() where list.Count > 0 select new FileInfo { FilePath = fullPath, FileName = list[list.Count - 1] }).ToList();
 
             fileList = orderType == OrderType.Ascending
                 ? fileList.OrderBy(j => j.FileName).ThenBy(j => j.FilePath).ToList()
@@ -769,7 +772,20 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>
         private void lbFiles_DragOver(object sender, DragEventArgs e)
         {
+            if (e.Effect == DragDropEffects.Copy) return;
+
             e.Effect = DragDropEffects.Move;
+        }
+
+        /// <summary>
+        /// This is used to give effect while dropping an item to the listbox
+        /// </summary>
+        /// <param name="sender">The sender info (For example Main Form)</param>
+        /// <param name="e">Event Arguments</param>
+        private void lbFiles_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
         }
 
         /// <summary>
@@ -780,13 +796,34 @@ namespace PdfCombiner
         /// <param name="e">Event Arguments</param>m>
         private void lbFiles_DragDrop(object sender, DragEventArgs e)
         {
-            var point = lbFiles.PointToClient(new Point(e.X, e.Y));
-            var index = lbFiles.IndexFromPoint(point);
-            if (index < 0) index = lbFiles.Items.Count - 1;
-            // type of string because file names stored in string in listbox
-            var data = e.Data.GetData(typeof(string));
-            lbFiles.Items.Remove(data);
-            lbFiles.Items.Insert(index, data);
+            if (e.Effect == DragDropEffects.Copy)
+            {
+                string[] fileNames = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                var errorMessages = new List<string>();
+                foreach (string file in fileNames)
+                {
+                    if (Path.GetExtension(file) == ".pdf")
+                        lbFiles.Items.Add(file);
+                    else errorMessages.Add(file);
+                }
+                // Display messages if non-pdf files
+                if (errorMessages.Count > 0)
+                {
+                    string messages = string.Join(Environment.NewLine, errorMessages);
+                    MessageBox.Show($"Only PDF files are allowed, and these files are invalid.\n\r{messages}", "Invalid File Type");
+                }
+            }
+            else if (e.Effect == DragDropEffects.Move)
+            {
+                var point = lbFiles.PointToClient(new Point(e.X, e.Y));
+                var index = lbFiles.IndexFromPoint(point);
+                if (index < 0) index = lbFiles.Items.Count - 1;
+                // type of string because file names stored in string in listbox
+                var data = e.Data.GetData(typeof(string));
+                lbFiles.Items.Remove(data);
+                lbFiles.Items.Insert(index, data);
+            }
         }
 
         #endregion

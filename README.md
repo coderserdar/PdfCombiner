@@ -40,9 +40,22 @@ You can look up the source code's documentation in [Documentation](https://githu
 
 And you can look up screenshots like 
 
+**v5**
+
+Changes within version 5:
+
+ - Implemented feature to drag and drop pdf files to the list box.
+ 
+<table>
+   <tr>
+      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v5/App_Screens_01.png?raw=true"></td>
+      <td><img src="https://github.com/ss34nirala34/PdfCombiner/blob/main/Screenshots/v5/App_Screens_02.png?raw=true"></td>
+   </tr>
+</table>
+
 **v4**
 
-Consider these changes within version 4:
+Changes within version 4:
 
  - Upgraded to the .NET 4.8 framework to facilitate the addition of new features and support future development and enhancements.
  - Now compatible with Visual Studio 2022.

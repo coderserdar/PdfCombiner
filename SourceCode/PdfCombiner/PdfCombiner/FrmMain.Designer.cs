@@ -47,6 +47,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbFiles = new System.Windows.Forms.ListBox();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -205,6 +206,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.cmbLanguage);
             this.panel1.Controls.Add(this.btnCombineITextSharp);
             this.panel1.Controls.Add(this.pbFiles);
@@ -215,21 +217,22 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(666, 91);
+            this.panel1.Size = new System.Drawing.Size(666, 116);
             this.panel1.TabIndex = 12;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lbFiles);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 91);
+            this.panel2.Location = new System.Drawing.Point(0, 116);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(666, 317);
+            this.panel2.Size = new System.Drawing.Size(666, 292);
             this.panel2.TabIndex = 13;
             // 
             // lbFiles
             // 
             this.lbFiles.AllowDrop = true;
+            this.lbFiles.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lbFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbFiles.FormattingEnabled = true;
@@ -237,12 +240,22 @@
             this.lbFiles.Location = new System.Drawing.Point(0, 0);
             this.lbFiles.Name = "lbFiles";
             this.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbFiles.Size = new System.Drawing.Size(666, 317);
+            this.lbFiles.Size = new System.Drawing.Size(666, 292);
             this.lbFiles.TabIndex = 5;
             this.lbFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragDrop);
+            this.lbFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragEnter);
             this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragOver);
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             this.lbFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbFiles_MouseDown);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(6, 90);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(272, 17);
+            this.lblInfo.TabIndex = 46;
+            this.lblInfo.Text = "Drop your pdf files below to combine them";
             // 
             // FrmMain
             // 
@@ -261,6 +274,7 @@
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.menuStrip.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -285,6 +299,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox lbFiles;
+        private System.Windows.Forms.Label lblInfo;
     }
 }
 
