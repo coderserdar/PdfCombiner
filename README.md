@@ -16,6 +16,7 @@ This app is written in **C#** programming language and in **Visual Studio 2022**
 
 In this app you can do;
 
+ - Add PDF files with Drag and Drop to the blank area i.e. list box (you can add multiple files)
  - Add PDF files with File Dialog (you can add multiple files)
  - Add PDF files within a selected Folder with Folder Dialog
  	+ You will add the PDF files recursively, it adds the files in subfolders.
@@ -30,7 +31,7 @@ In this app you can do;
  - Delete the files which you don't want to combine in your file list
  - Combine files via **PdfSharp**
  - Combine files via **iTextSharp**
- - Multi Language support for **English**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese**, **Bengali**, **Indonesian**, **Indian**, **Japanese**
+ - Multi Language support for **English**, **Indian**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese**, **Bengali**, **Indonesian**, **Japanese**
  - Look the process status in the progress bar (Adding files or combining files)
  - Info messages after every operation in app
    
