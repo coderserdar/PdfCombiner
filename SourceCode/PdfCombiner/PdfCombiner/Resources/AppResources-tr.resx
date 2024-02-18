@@ -133,7 +133,7 @@
     <value>PDF dosyalarını birleştirirken bir hata oluştu. Detayları: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF dosyaları başarıyla birleştirildi </value>
+    <value>PDF dosyaları başarıyla birleştirildi </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Dosya Birleştir (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Sil</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> dosya/lar başarıyla listeden silindi</value>
+    <value>dosya/lar başarıyla listeden silindi</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Şu anda </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> dosyayı listeden silmek üzeresiniz. Emin misiniz?</value>
+    <value>dosyayı listeden silmek üzeresiniz. Emin misiniz?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> dosya/lar başarıyla listeye eklendi</value>
+    <value>dosya/lar başarıyla listeye eklendi</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Dil</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDF Dosyaları</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>PDF dosyalarınızı birleştirmek için aşağıya sürükleyip bırakın.</value>
   </data>
 </root>

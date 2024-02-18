@@ -133,7 +133,7 @@
     <value>Há um erro ao combinar arquivos PDF na lista. Detalhes: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> Arquivos PDF combinados com sucesso em </value>
+    <value>Arquivos PDF combinados com sucesso em </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Combinar Arquivos (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Excluir</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> arquivo(s) excluído(s) com sucesso da lista.</value>
+    <value>arquivo(s) excluído(s) com sucesso da lista.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Você está prestes a excluir </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> arquivos na caixa de listagem. Tem certeza?</value>
+    <value>arquivos na caixa de listagem. Tem certeza?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> arquivo(s) adicionado(s) com sucesso à lista</value>
+    <value>arquivo(s) adicionado(s) com sucesso à lista</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Linguagem</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>Arquivos PDF</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Arraste e solte seus arquivos PDF abaixo para combiná-los.</value>
   </data>
 </root>

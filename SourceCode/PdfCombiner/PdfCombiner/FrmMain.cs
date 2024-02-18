@@ -1,4 +1,5 @@
 ﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
@@ -10,11 +11,9 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
-using iTextSharp.text.pdf;
+using static PdfCombiner.Enums;
 using PdfDocument = PdfSharp.Pdf.PdfDocument;
 using PdfReader = PdfSharp.Pdf.IO.PdfReader;
-using static PdfCombiner.Enums;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PdfCombiner
 {
@@ -22,9 +21,27 @@ namespace PdfCombiner
     {
         private static ResourceManager _resource;
 
-        // Culture lists whose resources have been added to project
+
+        /// <summary>
+        /// Culture lists whose resources have been added to the project based on ISO 639 language codes
+        /// EN: English
+        /// HI: Hindi
+        /// TR: Turkish
+        /// DE: German
+        /// FR: French
+        /// RU: Russian
+        /// ES: Spanish
+        /// IT: Italian
+        /// ZH: Chinese(Simplified)
+        /// AR: Arabic
+        /// NL: Dutch
+        /// PT: Portuguese
+        /// ID: Indonesian
+        /// JP: Japanese
+        /// BG: Bulgarian
+        /// </summary>
         private static readonly List<string> LanguageList = new List<string>
-            {"EN", "IN", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR", "NL", "PT", "ID", "JP", "BG"};
+            {"EN", "HI", "TR", "DE", "FR", "RU", "ES", "IT", "ZH", "AR", "NL", "PT", "ID", "JP", "BG"};
 
         public FrmMain()
         {
@@ -141,6 +158,7 @@ namespace PdfCombiner
             btnClearList.Text = _resource.GetString("ClearFileList") ?? string.Empty;
             btnCombineITextSharp.Text = _resource.GetString("CombineFilesITextSharp") ?? string.Empty;
             btnCombinePdfSharp.Text = _resource.GetString("CombineFilesPdfSharp") ?? string.Empty;
+            lbDragDropInfo.Text = _resource.GetString("DragAndDropInstruction") ?? string.Empty;
             menuItemDelete.Text = _resource.GetString("Delete") ?? string.Empty;
             menuItemOrderByPathAscending.Text = _resource.GetString("OrderByPathAscending") ?? string.Empty;
             menuItemOrderByPathDescending.Text = _resource.GetString("OrderByPathDescending") ?? string.Empty;
@@ -467,7 +485,7 @@ namespace PdfCombiner
         /// <param name="ex">Exception information</param>
         private void GenerateExceptionMessage(Exception ex)
         {
-            MessageBox.Show(_resource.GetString("CombineErrorMessage") + ex.GetAllMessages(), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"{_resource.GetString("CombineErrorMessage")} {ex.GetAllMessages()}", _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             pbFiles.Value = pbFiles.Minimum;
             if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
@@ -526,7 +544,7 @@ namespace PdfCombiner
         /// <param name="outputFileName">Output File Name</param>
         private void GenerateCombineFileMessage(int fileCount, string outputFileName)
         {
-            MessageBox.Show(fileCount + _resource.GetString("CombineFileMessage") + outputFileName, _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{fileCount} {_resource.GetString("CombineFileMessage")} {outputFileName}", _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             pbFiles.Value = pbFiles.Minimum;
             if (ActiveForm != null) ActiveForm.Text = _resource.GetString("AppTitle");
         }
@@ -593,7 +611,7 @@ namespace PdfCombiner
         /// <param name="deleteDialog">Delete File Dialog</param>
         private void ShowDeleteDialog(out DialogResult deleteDialog)
         {
-            deleteDialog = MessageBox.Show(_resource.GetString("DeleteWarning1") + lbFiles.SelectedItems.Count + _resource.GetString("DeleteWarning2"), _resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            deleteDialog = MessageBox.Show($"{_resource.GetString("DeleteWarning1")} {lbFiles.SelectedItems.Count} {_resource.GetString("DeleteWarning2")}", _resource.GetString("AppTitle"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
         }
 
         /// <summary>
@@ -635,7 +653,7 @@ namespace PdfCombiner
         /// <param name="fileCount">Deleted File Count Information</param>
         private static void GenerateDeleteItemMessage(int fileCount)
         {
-            MessageBox.Show(fileCount + _resource.GetString("DeleteFileMessage"), _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{fileCount} {_resource.GetString("DeleteFileMessage")}", _resource.GetString("AppTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion

@@ -133,7 +133,7 @@
     <value>Beim Kombinieren von PDF-Dateien in der Liste ist ein Fehler aufgetreten. Einzelheiten: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value>  PDF-Dateien erfolgreich kombiniert  </value>
+    <value>PDF-Dateien erfolgreich kombiniert  </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Dateien Kombinieren (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Löschen</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> Datei/en erfolgreich aus der Liste gelöscht.</value>
+    <value>Datei/en erfolgreich aus der Liste gelöscht.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Sie sind im Begriff zu löschen </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> Dateien im Listenfeld. Bist du sicher?</value>
+    <value>Dateien im Listenfeld. Bist du sicher?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> Datei/en erfolgreich zur Liste hinzugefügt</value>
+    <value>Datei/en erfolgreich zur Liste hinzugefügt</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Sprache</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDF Dateien</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Ziehen Sie Ihre PDF-Dateien per Drag-and-Drop nach unten, um sie zu kombinieren.</value>
   </data>
 </root>

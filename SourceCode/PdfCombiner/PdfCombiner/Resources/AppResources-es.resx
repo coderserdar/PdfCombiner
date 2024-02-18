@@ -148,16 +148,16 @@
     <value>Borrar</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> archivo/s eliminados con éxito de la lista.</value>
+    <value>archivo/s eliminados con éxito de la lista.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Estás a punto de eliminar </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> archivos en el cuadro de lista. ¿Está seguro?</value>
+    <value>archivos en el cuadro de lista. ¿Está seguro?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> archivo/s añadidos con éxito a la lista</value>
+    <value>archivo/s añadidos con éxito a la lista</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>Archivos PDF</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Arrastre y suelte sus archivos PDF a continuación para combinarlos.</value>
   </data>
 </root>

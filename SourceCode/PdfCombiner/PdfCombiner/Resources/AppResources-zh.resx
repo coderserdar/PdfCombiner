@@ -133,7 +133,7 @@
     <value>合并列表中的 PDF 文件时出错。 细节: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF 文件成功合并在 </value>
+    <value>PDF 文件成功合并在 </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>合并文件 (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>删除</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> 文件/s 已成功从列表中删除。</value>
+    <value>文件/s 已成功从列表中删除。</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>您即将删除 </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> 列表框中的文件。 你确定吗？</value>
+    <value>列表框中的文件。 你确定吗？</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> 文件/s 成功添加到列表中</value>
+    <value>文件/s 成功添加到列表中</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>语言</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDF 文件</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>将您的 PDF 文件拖放到下面以将它们合并。</value>
   </data>
 </root>

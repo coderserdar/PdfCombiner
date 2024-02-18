@@ -192,4 +192,7 @@
   <data name="PdfFiles" xml:space="preserve">
     <value>ملفات PDF</value>
   </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>قم بسحب وإسقاط ملفات PDF الخاصة بك أدناه لدمجها.</value>
+  </data>
 </root>

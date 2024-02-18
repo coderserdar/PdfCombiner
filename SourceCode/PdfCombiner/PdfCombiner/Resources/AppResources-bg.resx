@@ -133,7 +133,7 @@
     <value>তালিকায় PDF ফাইলগুলি একত্রিত করার সময় একটি ত্রুটি রয়েছে৷ বিস্তারিত: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF ফাইলগুলি সফলভাবে একত্রিত হয়েছে৷ </value>
+    <value>PDF ফাইলগুলি সফলভাবে একত্রিত হয়েছে৷ </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>ফাইল একত্রিত করুন (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>মুছে ফেলা</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> ফাইল/গুলি সফলভাবে তালিকা থেকে মুছে ফেলা হয়েছে।</value>
+    <value>ফাইল/গুলি সফলভাবে তালিকা থেকে মুছে ফেলা হয়েছে।</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>আপনি মুছে ফেলতে চলেছেন৷ </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> তালিকাবক্সে ফাইল। তুমি কি নিশ্চিত?</value>
+    <value>তালিকাবক্সে ফাইল। তুমি কি নিশ্চিত?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> ফাইল/গুলি সফলভাবে তালিকায় যোগ করা হয়েছে</value>
+    <value>ফাইল/গুলি সফলভাবে তালিকায় যোগ করা হয়েছে</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>ভাষা</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>পিডিএফ ফাইল</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>আপনার PDF ফাইলগুলিকে একত্রিত করতে নীচে টেনে আনুন এবং ড্রপ করুন৷</value>
   </data>
 </root>

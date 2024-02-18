@@ -133,7 +133,7 @@
     <value>Ada kesalahan saat menggabungkan file PDF dalam daftar. Detail: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> File PDF berhasil digabungkan dalam </value>
+    <value>File PDF berhasil digabungkan dalam </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Gabungkan File (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Menghapus</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> file/s berhasil dihapus dari daftar.</value>
+    <value>file/s berhasil dihapus dari daftar.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Anda akan menghapus </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> file di kotak daftar. Apa kamu yakin?</value>
+    <value>file di kotak daftar. Apa kamu yakin?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> file/s berhasil ditambahkan ke daftar</value>
+    <value>file/s berhasil ditambahkan ke daftar</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Bahasa</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>File PDF</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Seret dan letakkan file PDF Anda di bawah untuk menggabungkannya.</value>
   </data>
 </root>
