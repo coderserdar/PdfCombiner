@@ -78,20 +78,26 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\AppResources-ar.resx" />
-    <EmbeddedResource Include="Resources\AppResources-bg.resx" />
+    <EmbeddedResource Include="Resources\AppResources-ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources-bg.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources-de.resx" />
     <EmbeddedResource Include="Resources\AppResources-es.resx" />
     <EmbeddedResource Include="Resources\AppResources-fr.resx" />
     <EmbeddedResource Include="Resources\AppResources-id.resx" />
-    <EmbeddedResource Include="Resources\AppResources-in.resx" />
+    <EmbeddedResource Include="Resources\AppResources-hi.resx" />
     <EmbeddedResource Include="Resources\AppResources-it.resx" />
     <EmbeddedResource Include="Resources\AppResources-jp.resx" />
     <EmbeddedResource Include="Resources\AppResources-nl.resx" />
     <EmbeddedResource Include="Resources\AppResources-pt.resx" />
     <EmbeddedResource Include="Resources\AppResources-ru.resx" />
     <EmbeddedResource Include="Resources\AppResources-tr.resx" />
-    <EmbeddedResource Include="Resources\AppResources-en.resx" />
+    <EmbeddedResource Include="Resources\AppResources-en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources-zh.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />

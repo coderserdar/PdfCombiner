@@ -133,7 +133,7 @@
     <value>リスト内のPDFファイルを結合中にエラーが発生しました。 詳細：</value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDFファイルが正常に結合されました </value>
+    <value>PDFファイルが正常に結合されました </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>ファイルを組み合わせる (iTextSharp)</value>
@@ -148,7 +148,7 @@
     <value>消去</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> ファイルがリストから正常に削除されました。</value>
+    <value>ファイルがリストから正常に削除されました。</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>削除しようとしています </value>
@@ -157,7 +157,7 @@
     <value> リストボックス内のファイル。 本気ですか？</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> ファイルがリストに正常に追加されました</value>
+    <value>ファイルがリストに正常に追加されました</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>言語</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDFファイル</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>PDF ファイルを下にドラッグ アンド ドロップして結合します。</value>
   </data>
 </root>

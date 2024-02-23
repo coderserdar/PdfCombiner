@@ -124,7 +124,7 @@
     <value>फ़ोल्डर जोड़ें</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>PDF संयोजक</value>
+    <value>पीडीएफ संयोजक</value>
   </data>
   <data name="ClearFileList" xml:space="preserve">
     <value>फ़ाइल सूची साफ़ करें</value>
@@ -133,7 +133,7 @@
     <value>पीडीएफ फाइलों को सूची में मिलाते समय एक त्रुटि हुई है। विवरण: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> पीडीएफ फाइलों को सफलतापूर्वक जोड़ा गया </value>
+    <value>पीडीएफ फाइलों को सफलतापूर्वक जोड़ा गया </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>फाइलों को मिलाएं (iTextSharp)</value>
@@ -142,22 +142,22 @@
     <value>फाइलों को मिलाएं (PdfSharp)</value>
   </data>
   <data name="CombineWarning" xml:space="preserve">
-    <value>संयोजित करने के लिए कम से कम 2 PDF फ़ाइलें होनी चाहिए</value>
+    <value>संयोजित करने के लिए कम से कम 2 पीडीएफ फ़ाइलें होनी चाहिए</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>मिटाना</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> फ़ाइल/फ़ाइलों को सूची से सफलतापूर्वक हटा दिया गया है।</value>
+    <value>फ़ाइल/फ़ाइलों को सूची से सफलतापूर्वक हटा दिया गया है।</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>आप मिटाने वाले हैं </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> सूची बॉक्स में फ़ाइलें। क्या आपको यकीन है?</value>
+    <value>सूची बॉक्स में फ़ाइलें। क्या आपको यकीन है?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> फ़ाइल/एस को सफलतापूर्वक सूची में जोड़ा गया</value>
+    <value>फ़ाइल/एस को सफलतापूर्वक सूची में जोड़ा गया</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>भाषा</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>पीडीएफ फाइलें</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>अपनी पीडीएफ फाइलों को संयोजित करने के लिए उन्हें नीचे खींचें और छोड़ें।</value>
   </data>
 </root>

@@ -45,9 +45,9 @@
             this.btnCombineITextSharp = new System.Windows.Forms.Button();
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbDragDropInfo = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbFiles = new System.Windows.Forms.ListBox();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -206,7 +206,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lblInfo);
+            this.panel1.Controls.Add(this.lbDragDropInfo);
             this.panel1.Controls.Add(this.cmbLanguage);
             this.panel1.Controls.Add(this.btnCombineITextSharp);
             this.panel1.Controls.Add(this.pbFiles);
@@ -219,6 +219,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(666, 116);
             this.panel1.TabIndex = 12;
+            // 
+            // lbDragDropInfo
+            // 
+            this.lbDragDropInfo.AutoSize = true;
+            this.lbDragDropInfo.Location = new System.Drawing.Point(6, 91);
+            this.lbDragDropInfo.Name = "lbDragDropInfo";
+            this.lbDragDropInfo.Size = new System.Drawing.Size(129, 17);
+            this.lbDragDropInfo.TabIndex = 46;
+            this.lbDragDropInfo.Text = "Dran and Drop Info";
             // 
             // panel2
             // 
@@ -247,15 +256,6 @@
             this.lbFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.lbFiles_DragOver);
             this.lbFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbFiles_KeyDown);
             this.lbFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbFiles_MouseDown);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(6, 90);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(272, 17);
-            this.lblInfo.TabIndex = 46;
-            this.lblInfo.Text = "Drop your pdf files below to combine them";
             // 
             // FrmMain
             // 
@@ -299,7 +299,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox lbFiles;
-        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lbDragDropInfo;
     }
 }
 

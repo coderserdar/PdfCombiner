@@ -148,16 +148,16 @@
     <value>Eliminare</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> file cancellati con successo dall'elenco.</value>
+    <value>file cancellati con successo dall'elenco.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Stai per cancellare </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> file nella casella di riepilogo. Sei sicuro?</value>
+    <value>file nella casella di riepilogo. Sei sicuro?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> file/i aggiunti con successo all'elenco</value>
+    <value>file/i aggiunti con successo all'elenco</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Lingua</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>File PDF</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Trascina e rilascia i tuoi file PDF qui sotto per combinarli.</value>
   </data>
 </root>

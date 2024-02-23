@@ -133,7 +133,7 @@
     <value>Er is een fout opgetreden bij het combineren van PDF-bestanden in de lijst. Details: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF-bestanden succesvol gecombineerd in </value>
+    <value>PDF-bestanden succesvol gecombineerd in </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Bestanden Combineren (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Verwijderen</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> bestand(en) succesvol verwijderd uit de lijst.</value>
+    <value>bestand(en) succesvol verwijderd uit de lijst.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Je staat op het punt om te verwijderen  </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> bestanden in de keuzelijst. Weet je het zeker?</value>
+    <value>bestanden in de keuzelijst. Weet je het zeker?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> bestand(en) succesvol toegevoegd aan de lijst</value>
+    <value>bestand(en) succesvol toegevoegd aan de lijst</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Taal</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDF-Bestanden</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Sleep uw PDF-bestanden hieronder om ze te combineren.</value>
   </data>
 </root>

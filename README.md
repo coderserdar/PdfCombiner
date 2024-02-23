@@ -31,7 +31,7 @@ In this app you can do;
  - Delete the files which you don't want to combine in your file list
  - Combine files via **PdfSharp**
  - Combine files via **iTextSharp**
- - Multi Language support for **English**, **Indian**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese**, **Bengali**, **Indonesian**, **Japanese**
+ - Multi Language support for **English**, **Hindi**, **Turkish**, **German**, **French**, **Spanish**, **Russian**, **Italian**, **Chinese (Basic)**, **Arabic**, **Dutch**, **Portuguese**, **Bengali**, **Indonesian**, **Japanese**
  - Look the process status in the progress bar (Adding files or combining files)
  - Info messages after every operation in app
    
@@ -41,6 +41,14 @@ You can look up the source code's documentation in [Documentation](https://githu
 
 And you can look up screenshots like 
 
+**v6**
+
+Changes within version 6:
+
+ - Modified language code and resources, changed IN to HI for Hindi as per ISO 639 language code.
+ - Corrected culture lists, translated "Drag and Drop" message for all languages.
+ - Removed space in resource file at the beginning of the message and modified string formatting.
+ 
 **v5**
 
 Changes within version 5:

@@ -133,7 +133,7 @@
     <value>Возникла ошибка при объединении файлов PDF в список. Подробности:</value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value> PDF-файлы успешно объединены в </value>
+    <value>PDF-файлы успешно объединены в </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Объединить файлы (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Удалить</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> файл/ы успешно удалены из списка.</value>
+    <value>файл/ы успешно удалены из списка.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Вы собираетесь удалить </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> файлы в списке. Уверены ли вы?</value>
+    <value>файлы в списке. Уверены ли вы?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> файл/ы успешно добавлены в список</value>
+    <value>файл/ы успешно добавлены в список</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>язык</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>pdf файлы</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Перетащите PDF-файлы ниже, чтобы объединить их.</value>
   </data>
 </root>

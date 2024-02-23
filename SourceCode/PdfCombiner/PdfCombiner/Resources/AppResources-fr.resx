@@ -133,7 +133,7 @@
     <value>Une erreur s'est produite lors de la combinaison de fichiers PDF dans la liste. Des détails: </value>
   </data>
   <data name="CombineFileMessage" xml:space="preserve">
-    <value>  Fichiers PDF combinés avec succès dans  </value>
+    <value>Fichiers PDF combinés avec succès dans  </value>
   </data>
   <data name="CombineFilesITextSharp" xml:space="preserve">
     <value>Combiner Des Fichiers (iTextSharp)</value>
@@ -148,16 +148,16 @@
     <value>Effacer</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> fichier(s) supprimé(s) avec succès de la liste.</value>
+    <value>fichier(s) supprimé(s) avec succès de la liste.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>Vous êtes sur le point de supprimer </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> fichiers dans la liste déroulante. Es-tu sûr?</value>
+    <value>fichiers dans la liste déroulante. Es-tu sûr?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> fichier(s) ajouté(s) avec succès à la liste</value>
+    <value>fichier(s) ajouté(s) avec succès à la liste</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Langue</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>Fichiers PDF</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Faites glisser et déposez vos fichiers PDF ci-dessous pour les combiner.</value>
   </data>
 </root>

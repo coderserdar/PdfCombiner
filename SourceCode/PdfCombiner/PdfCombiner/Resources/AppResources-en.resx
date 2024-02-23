@@ -148,16 +148,16 @@
     <value>Delete</value>
   </data>
   <data name="DeleteFileMessage" xml:space="preserve">
-    <value> file/s successfully deleted from the list.</value>
+    <value>file/s successfully deleted from the list.</value>
   </data>
   <data name="DeleteWarning1" xml:space="preserve">
     <value>You are about to delete </value>
   </data>
   <data name="DeleteWarning2" xml:space="preserve">
-    <value> files in listbox. Are you sure?</value>
+    <value>files in listbox. Are you sure?</value>
   </data>
   <data name="FileAddMessage" xml:space="preserve">
-    <value> file/s successfully added to the list</value>
+    <value>file/s successfully added to the list</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -191,5 +191,8 @@
   </data>
   <data name="PdfFiles" xml:space="preserve">
     <value>PDF Files</value>
+  </data>
+  <data name="DragAndDropInstruction" xml:space="preserve">
+    <value>Drag and drop your PDF files below to combine them.</value>
   </data>
 </root>
